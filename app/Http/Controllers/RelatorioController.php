@@ -45,19 +45,44 @@ class RelatorioController extends Controller
 
         $modulo_ti = Modulo_Ti::where('relatorio_id','=',$relatorio->id)->get();
         
-        // dd($modulo_ti);
+        //  dd($modulo_ti);
         
-
-
-
-
         return view('relatorio.update', compact('relatorio','perguntas','modulo_ti'));
     }
 
     public function update(Request $request, $id)
     {
+        // $id = $request['id'];
 
+        // $pergunta_id = $request['pergunta_id'];
 
+        // $n_chamado = $request['n_chamado'];
+
+        // $obs = $request['obs'];
+
+        $resultados = array_map(null, $request['id'], $request['pergunta_id'],$request['n_chamado'],$request['obs']);
+        // dd($resultados);
+
+        $results = [];
+
+        foreach($resultados as $resultado) {
+            if($resultado[0] != null && $resultado[2] != null && $resultado[3] != null){
+               //Fazer o Update do valor no Banco de dados
+               
+                // $a = $resultado;
+                // array_push($results,$a);
+            }elseif($resultado[0] == null && $resultado[2] != null && $resultado[3] != null){
+                //Fazer o Create do Valor no Banco de dados
+                
+                // $a = $resultado;
+                // array_push($results,$a);
+            }
+        }
+
+        dd($results);
+
+        
+        
     }
 
 
