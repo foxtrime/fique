@@ -52,6 +52,7 @@ class RelatorioController extends Controller
 
     public function update(Request $request, $id)
     {
+        
         // $id = $request['id'];
 
         // $pergunta_id = $request['pergunta_id'];
@@ -61,27 +62,42 @@ class RelatorioController extends Controller
         // $obs = $request['obs'];
 
         $resultados = array_map(null, $request['id'], $request['pergunta_id'],$request['n_chamado'],$request['obs']);
-        // dd($resultados);
+        //  dd($resultados);
 
-        $results = [];
+        // $results = [];
 
         foreach($resultados as $resultado) {
             if($resultado[0] != null && $resultado[2] != null && $resultado[3] != null){
                //Fazer o Update do valor no Banco de dados
-               
-                // $a = $resultado;
+                
+               $update = Modulo_Ti::find($resultado[0]);
+               $update->n_chamado = $resultado[2];
+               $update->obs = $resultado[3];
+               $update->save();
+
+            //    $update->update($resultado->only(['n_chamado', 'obs']));
+            //    dd($update);
+
+
+
+            
+               // $a = $resultado;
                 // array_push($results,$a);
             }elseif($resultado[0] == null && $resultado[2] != null && $resultado[3] != null){
                 //Fazer o Create do Valor no Banco de dados
+
+               
+                $insert = Modulo_Ti::create(['n_chamado' => $resultado[2], 'obs' => $resultado[3], 'relatorio_id' => $id,'pergunta_id'=> $resultado[1]]);
                 
                 // $a = $resultado;
                 // array_push($results,$a);
+                
             }
         }
 
-        dd($results);
+        // dd($results);
 
-        
+        return redirect(url('/relatorio'));
         
     }
 

@@ -87,6 +87,12 @@
 						<p>Relatorio</p>
 					</a>
 				</li>
+				<li>
+					<a href="">
+						<i class="material-icons">dashboard</i>
+						<p>Contate-nos</p>
+					</a>
+				</li>
 			@elseif(Auth::user()->nivel == 'user_ti')
 				<li>
 					<a href="{{ url("/home") }}">
