@@ -54,7 +54,7 @@ class ExampleCron extends Command
         // dd($arr);
 
         foreach($arr as $key => $id){
-            $a = Carbon::now()->locale('pt_BR')->format('d-m-Y');
+            $a = Carbon::now()->subDays(1)->locale('pt_BR')->format('d-m-Y');
             // DB::table('relatorios')->insert(['unidade_id' => $id]);
             DB::table('relatorios')->insert(['unidade_id' => $id,'data' => $a]);
         }

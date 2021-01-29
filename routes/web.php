@@ -30,6 +30,12 @@ Route::get('/register', 'AuthController@create');
 Route::post('register', 'AuthController@store');
 /*============================================================================*/
 
+//========================================================================================
+// 										CHAMADO_TI
+//========================================================================================
+    Route::post('relatorio/enviachamadoti', 'RelatorioController@envia');
+
+
 //===========================Password=======================================
     Route::get 	('/alterasenha',		'AuthController@AlteraSenha');
 	Route::post	('/salvasenha',   		'AuthController@SalvarSenha');

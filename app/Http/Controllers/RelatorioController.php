@@ -53,14 +53,7 @@ class RelatorioController extends Controller
     public function update(Request $request, $id)
     {
         
-        // $id = $request['id'];
-
-        // $pergunta_id = $request['pergunta_id'];
-
-        // $n_chamado = $request['n_chamado'];
-
-        // $obs = $request['obs'];
-
+    
         $resultados = array_map(null, $request['id'], $request['pergunta_id'],$request['n_chamado'],$request['obs']);
         //  dd($resultados);
 
@@ -73,21 +66,16 @@ class RelatorioController extends Controller
                $update = Modulo_Ti::find($resultado[0]);
                $update->n_chamado = $resultado[2];
                $update->obs = $resultado[3];
+            //    $update->chamado_aberto = 1;   DEFAULT 1
                $update->save();
-
-            //    $update->update($resultado->only(['n_chamado', 'obs']));
-            //    dd($update);
-
-
-
             
                // $a = $resultado;
                 // array_push($results,$a);
             }elseif($resultado[0] == null && $resultado[2] != null && $resultado[3] != null){
                 //Fazer o Create do Valor no Banco de dados
-
+                $data = Carbon::now()->subDays(1)->locale('pt_BR')->format('d-m-Y');
                
-                $insert = Modulo_Ti::create(['n_chamado' => $resultado[2], 'obs' => $resultado[3], 'relatorio_id' => $id,'pergunta_id'=> $resultado[1]]);
+                $insert = Modulo_Ti::create(['n_chamado' => $resultado[2], 'obs' => $resultado[3], 'relatorio_id' => $id,'pergunta_id'=> $resultado[1],'data_chamado_aberto' => $data]);
                 
                 // $a = $resultado;
                 // array_push($results,$a);
@@ -97,9 +85,23 @@ class RelatorioController extends Controller
 
         // dd($results);
 
-        return redirect(url('/relatorio'));
-        
+        return redirect(url('/relatorio'));   
     }
+
+    public function envia(Request $request)
+    {
+
+        $data = Carbon::now()->locale('pt_BR')->format('d-m-Y');
+
+        $modulo_ti = Modulo::find($request->id);
+
+        $modulo_ti->chamado_aberto = 0;
+        $modulo_ti->data_chamado_fechado = $data;
+
+        $modulo_ti->save();
+
+    }
+
 
 
 }

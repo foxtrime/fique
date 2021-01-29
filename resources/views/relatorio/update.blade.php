@@ -15,67 +15,92 @@
 					{!! method_field('PUT') !!}
 						{{ csrf_field() }}
 
-				<h2>T.I</h2>	
-				@foreach ($perguntas as $pergunta)
-					<div class="form-group-{{$pergunta->id}}">
-						<label for="exampleFormControlInput1" style="color: black">{{$pergunta->titulo}}</label>
-						<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador{{$pergunta->id}}">
-							<i class="material-icons">add</i>
-						</button>
-							<div id="ti_box_{{$pergunta->id}}">
-								<div class="ti-box-{{$pergunta->id}} row hide" id="ti-box">
-									<div class="form-group box_funcionario ">
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-											<input type="text" class="form-control" id="id" name="id[]" placeholder="N° Chamado" value="">
+						{{-- Div Ti --}}
+						<div>
+							<h2>T.I</h2>	
+							@foreach ($perguntas as $pergunta)
+								<div class="form-group-{{$pergunta->id}}">
+									<label for="exampleFormControlInput1" style="color: black">{{$pergunta->titulo}}</label>
+									<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador{{$pergunta->id}}">
+										<i class="material-icons">add</i>
+									</button>
+									<div id="ti_box_{{$pergunta->id}}">
+										<div class="ti-box-{{$pergunta->id}} row hide" id="ti-box">
+											<div class="form-group box_funcionario ">
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="id" name="id[]" placeholder="N° Chamado" value="">
+												</div>
+											
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="pergunta_id" name="pergunta_id[]" value="{{$pergunta->id}}">
+												</div>
+											
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="n_chamado" name="n_chamado[]" placeholder="N° Chamado">
+												</div>
+											
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="obs" name="obs[]" placeholder="Obs">
+												</div>
+												<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_{{$pergunta->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+												
+												{{-- <button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador{{$pergunta->id}}">
+													<i class="material-icons">add</i>
+												</button> --}}
+											</div>
 										</div>
-
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-											<input type="text" class="form-control" id="pergunta_id" name="pergunta_id[]" value="{{$pergunta->id}}">
-										</div>
-
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-											<input type="text" class="form-control" id="n_chamado" name="n_chamado[]" placeholder="N° Chamado">
-										</div>
-
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-											<input type="text" class="form-control" id="obs" name="obs[]" placeholder="Obs">
-										</div>
-										
-										<button type="button" class="btn btn-primary btn_remove_{{$pergunta->id}}">Remover</button>
-										{{-- <button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador{{$pergunta->id}}">
-											<i class="material-icons">add</i>
-										</button> --}}
-
 									</div>
+
+									@foreach ($modulo_ti as $item)
+										@if ($item->pergunta_id == $pergunta->id)
+										<div class="ti-box-e row" id="ti-box-e">
+											<div class="form-group box_funcionario ">
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="id" name="id[]" placeholder="N° Chamado" value="{{$item->id}}">
+												</div>
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="pergunta_id" name="pergunta_id[]" value="{{$pergunta->id}}">
+												</div>
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="n_chamado" name="n_chamado[]" placeholder="N° Chamado" value="{{$item->n_chamado}}">
+												</div>
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="obs" name="obs[]" placeholder="Obs" value="{{$item->obs}}">
+												</div>
+												{{-- <button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_{{$pergunta->id}}"> <i class='glyphicon glyphicon-trash'></i></button> --}}
+												@if($item->chamado_aberto == 1)
+													<button type="button" 
+															class="btn btn-success btn-xs action botao_acao btn_control btn_enviar{{$item->id}}"
+															id="btn_enviar{{$item->id}}"
+															>
+															<i class='glyphicon glyphicon-ok'></i>
+													</button>
+												@endif
+
+												{{-- <button type="button" 
+														class="btn btn-primary btn-fab btn-fab-mini btn-round btn_enviar"
+														data-toggle='tooltip'
+														data-placement='bottom'
+														title='Se o Chamado estiver resolvido Clique Aqui'
+														data-relatorio ='".$item->id."'>
+													<i class="fa fa-check" aria-hidden="true"></i>
+												</button> --}}
+
+
+											</div>
+										</div>
+										@endif
+									@endforeach
 								</div>
-							</div>
-							
-							@foreach ($modulo_ti as $item)
-							@if ($item->pergunta_id == $pergunta->id)
-							<div class="ti-box-e row" id="ti-box-e">
-								<div class="form-group box_funcionario ">
-									<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-										<input type="text" class="form-control" id="id" name="id[]" placeholder="N° Chamado" value="{{$item->id}}">
-									</div>
-									<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-										<input type="text" class="form-control" id="pergunta_id" name="pergunta_id[]" value="{{$pergunta->id}}">
-									</div>
-									<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-										<input type="text" class="form-control" id="n_chamado" name="n_chamado[]" placeholder="N° Chamado" value="{{$item->n_chamado}}">
-									</div>
-									<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-										<input type="text" class="form-control" id="obs" name="obs[]" placeholder="Obs" value="{{$item->obs}}">
-									</div>
-								</div>
-							</div>
-							@endif
 							@endforeach
 						</div>
-				@endforeach
+					{{-- Div Ti Fim --}}
 
+					{{-- Div Atenção Basica  --}}
+					<div>
 
-
-
+					</div>
+					{{-- Div Atenção Basica Fim  --}}
 
 				<!-- ============================BOTOES============================ -->
 				<div class="row col-md-12 col-sm-12">
@@ -104,10 +129,58 @@
 </div>
 @endsection
 @push('scripts')
+
+{{-- Sweet Alert --}}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script type="text/javascript">
 
 $(function(){
-      $('body').submit(function(event){
+
+	@foreach($modulo_ti as $item)
+		$("#btn_enviar{{$item->id}}").click(function(){
+			swal({
+				title: "Chamado Realizado?",
+				text: "O chamado {{$item->n_chamado}} foi resolvido?",
+				icon: "warning",
+				buttons: {
+					cancel: {
+						text: "Cancelar",
+						value: "cancelar",
+						visible: true,
+						closeModal: true,
+					},
+					ok: {
+						text: "Sim, Enviar!",
+						value: 'enviar',
+						visible: true,
+						closeModal: true,
+					}
+				}
+			})
+				.then(function (resultado) {
+					if(resultado === 'enviar'){
+						// 	console.log({{$item->id}})
+
+						// $.post('relatorio/enviachamadoti', {
+						// 	_token: '{{ csrf_token() }}',
+						// 	id: {{$item->id}},
+						// }, function(data){
+						// 	console.log(data);
+						// }).done(function(){
+						// 	location.reload();
+						// });
+				};
+			});
+		});
+	@endforeach
+
+			
+
+
+
+
+      		$('body').submit(function(event){
 				if ($(this).hasClass('enviar-relatorio')) {
 					event.preventDefault();
 				}
@@ -116,7 +189,6 @@ $(function(){
 					$(this).addClass('enviar-relatorio');
 				}
 			});
-			
 
 			$('.clonador1').click(function(){
 					$clone = $('.ti-box-1.hide').clone(true);
@@ -182,8 +254,6 @@ $(function(){
 				// 	$(this).parents('.ti-box').remove();
 				// });
 
-			
-
 
 			$("#btn_cancelar").click(function(){
 		      event.preventDefault();
@@ -194,7 +264,3 @@ $(function(){
 </script>
 
 @endpush
-
-
-
-

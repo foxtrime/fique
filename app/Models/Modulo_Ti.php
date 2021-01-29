@@ -13,6 +13,7 @@ class Modulo_Ti extends Model
         'obs',
         'chamado_aberto',
         'data_chamado_fechado',
+        'data_chamado_aberto',
         'relatorio_id',
         'pergunta_id',
     ];

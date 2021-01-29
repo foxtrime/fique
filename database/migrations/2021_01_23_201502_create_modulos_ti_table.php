@@ -17,7 +17,8 @@ class CreateModulosTiTable extends Migration
             $table->increments('id');
             $table->string('n_chamado')             ->nullable();
             $table->string('obs')                   ->nullable();
-            $table->boolean('chamado_aberto')       ->nullable();
+            $table->boolean('chamado_aberto')       ->default(true);
+            $table->string('data_chamado_aberto')   ->nullable();
             $table->string('data_chamado_fechado')  ->nullable();
             $table->timestamps();
 

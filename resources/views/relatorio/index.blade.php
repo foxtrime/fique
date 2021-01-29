@@ -18,7 +18,7 @@
 						<thead>
 							<tr>
 								<th>Nome da Unidade</th>
-								<th>Data</th>
+								<th>Data Do Relatorio</th>
 								<th class="disabled-sorting text-right" style="width: 16%;">Ações</th>
 							</tr>
 						</thead>
@@ -47,5 +47,5 @@
 </div>
 @endsection
 @push('scripts')
-
+	
 @endpush
