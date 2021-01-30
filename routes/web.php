@@ -11,10 +11,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'AuthController@index')->name('login');
 Route::post('/login', 'AuthController@login');
 
+
+Route::get('moduloti/enviachamadoti', 'ModuloTiController@envia');
+
+
 Route::group(['middleware'=>['auth']], function(){
     
     Route::get('/home', 'HomeController@index')->name('home');
-/*==================================LOGOUT=================================*/
+    /*==================================LOGOUT=================================*/
     Route::post('/logout',function(){
         Auth::logout();
         return redirect()->route('login');
@@ -22,19 +26,19 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/logout',function(){
         Auth::logout();
         return redirect()->route('login');
-        });
-/*============================================================================*/
+    });
+    /*============================================================================*/
     
-/*==================================REGISTRAR=================================*/
-Route::get('/register', 'AuthController@create');
-Route::post('register', 'AuthController@store');
-/*============================================================================*/
-
-//========================================================================================
-// 										CHAMADO_TI
-//========================================================================================
-    Route::post('relatorio/enviachamadoti', 'RelatorioController@envia');
-
+    /*==================================REGISTRAR=================================*/
+    Route::get('/register', 'AuthController@create');
+    Route::post('register', 'AuthController@store');
+    /*============================================================================*/
+    
+    //========================================================================================
+    // 										CHAMADO_TI
+    //========================================================================================
+    // Route::post('relatorio/enviachamadoti', 'RelatorioController@envia');
+    
 
 //===========================Password=======================================
     Route::get 	('/alterasenha',		'AuthController@AlteraSenha');

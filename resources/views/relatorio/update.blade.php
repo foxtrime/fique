@@ -160,25 +160,19 @@ $(function(){
 			})
 				.then(function (resultado) {
 					if(resultado === 'enviar'){
-						// 	console.log({{$item->id}})
+							// console.log({{$item->id}})
 
-						// $.post('relatorio/enviachamadoti', {
-						// 	_token: '{{ csrf_token() }}',
-						// 	id: {{$item->id}},
-						// }, function(data){
-						// 	console.log(data);
-						// }).done(function(){
-						// 	location.reload();
-						// });
+						$.get('{{ url("moduloti/enviachamadoti") }}', {
+							id: {{$item->id}},
+						}, function(data){
+							console.log(data);
+						}).done(function(){
+							location.reload();
+						});
 				};
 			});
 		});
 	@endforeach
-
-			
-
-
-
 
       		$('body').submit(function(event){
 				if ($(this).hasClass('enviar-relatorio')) {
