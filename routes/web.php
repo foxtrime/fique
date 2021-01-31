@@ -12,7 +12,7 @@ Route::get('/', 'AuthController@index')->name('login');
 Route::post('/login', 'AuthController@login');
 
 
-Route::get('moduloti/enviachamadoti', 'ModuloTiController@envia');
+
 
 
 Route::group(['middleware'=>['auth']], function(){
@@ -38,6 +38,7 @@ Route::group(['middleware'=>['auth']], function(){
     // 										CHAMADO_TI
     //========================================================================================
     // Route::post('relatorio/enviachamadoti', 'RelatorioController@envia');
+    Route::get('moduloti/enviachamadoti', 'ModuloTiController@envia');
     
 
 //===========================Password=======================================

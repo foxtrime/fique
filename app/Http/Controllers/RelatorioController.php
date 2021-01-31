@@ -16,12 +16,10 @@ class RelatorioController extends Controller
     {
         // Pega o Usuario Logado
         $user_logado = Auth::user();
-        // Filtra o relatorio do usuario logado
-        // $relatorios = Relatorio::where('unidade_id','=', $user_logado->unidade_id)->with('unidades')->get();
-        
-        $relatorios = Relatorio::where('unidade_id','=', $user_logado->unidade_id)->with('unidade')->get();
+                
+        $relatorios = Relatorio::where('unidade_id','=', $user_logado->unidade_id)->with('unidade','modulo_ti')->get();
 
-        // dd($relatorios);
+        // dd($relatorios[0]->modulo_ti);
         return view('relatorio.index', compact('relatorios'));
 
     }

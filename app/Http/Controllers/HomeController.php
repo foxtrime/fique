@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Modulo_ti;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -27,41 +28,34 @@ class HomeController extends Controller
     {
         $perfil = Auth::user();
 
-        // $a = Carbon::now()->locale('pt_BR')->format('d-m-Y');
-        // dd($a);
+        // Inicio Quantidade de chamados Abertos
+        $modulo_ti = Modulo_ti::where('chamado_aberto', '=', 1)->get();
+        $quantidade_chamado_aberto_ti  = $modulo_ti->count();
+        // Fim Quantidade de chamados Abertos
 
+        // Inicio Quantidade de chamados Resolvidos
+        $modulo_ti = Modulo_ti::where('chamado_aberto', '=', 0)->get();
+        $quantidade_chamado_resolvido_ti  = $modulo_ti->count();
+        // Fim Quantidade de chamados Resolvidos
+
+        $a = Modulo_ti::where('pergunta_id', '=', 1)->get();
+        $qtd_a = $a->count();
+
+        $b = Modulo_ti::where('pergunta_id', '=', 2)->get();
+        $qtd_b = $b->count();
         
+        $c = Modulo_ti::where('pergunta_id', '=', 3)->get();
+        $qtd_c = $c->count();
 
-        // dd($perfil);
+        $d = Modulo_ti::where('pergunta_id', '=', 4)->get();
+        $qtd_d = $d->count();
 
-        // 'super-admin',
-        // 'admin',
-        // 'user',
-        // 'user_ti',
-        // 'user_infra',
+        $e = Modulo_ti::where('pergunta_id', '=', 5)->get();
+        $qtd_e = $e->count();
 
-        // if($perfil == "super-admin"){
-            
-        //     return view('home');
+        $f = Modulo_ti::where('pergunta_id', '=', 6)->get();
+        $qtd_f = $f->count();
 
-        // }elseif($perfil == "admin"){
-
-        //     return view('home');
-
-        // }elseif($perfil == "user"){
-        //     return view('home');
-
-        // }elseif($perfil == "user_ti"){
-        //     return view('home');
-
-        // }elseif($perfil == "user_infra"){
-        //     return view('home');
-
-        // }
-
-        // $user = Auth::user();
-        // dd($user);
-
-        return view('home');
+        return view('home', compact('perfil','quantidade_chamado_aberto_ti','quantidade_chamado_resolvido_ti','qtd_a','qtd_b','qtd_c','qtd_d','qtd_e','qtd_f'));
     }
 }

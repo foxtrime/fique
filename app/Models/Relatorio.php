@@ -18,7 +18,7 @@ class Relatorio extends Model
         return $this->belongsTo('App\Models\Unidade');
     }
 
-    public function modulos()
+    public function modulo_ti()
     {
         return $this->hasMany('App\Models\Modulo_Ti');
     }

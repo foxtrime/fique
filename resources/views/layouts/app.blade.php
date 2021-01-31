@@ -39,6 +39,8 @@
 		{{-- Converse.JS --}}
 		<link rel="stylesheet" type="text/css" href="{{ asset('js/converse/converse.css') }}">
 
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+
 		@stack('css')
 		
 	</head>
@@ -88,6 +90,8 @@
 		<script src="{{ asset('js/moment.min.js') }}"></script>
 
 		<script src="{{ asset('js/chartist.js') }}"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js'></script>
 
 		<script src="{{ asset('js/jquery.bootstrap-wizard.js') }}"></script>
 		<script src="{{ asset('js/bootstrap-notify.js') }}"></script>

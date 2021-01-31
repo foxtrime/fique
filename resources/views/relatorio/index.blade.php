@@ -20,6 +20,7 @@
 								<th>Nome da Unidade</th>
 								<th>Data Do Relatorio</th>
 								<th class="disabled-sorting text-right" style="width: 16%;">Ações</th>
+								<th>Chamado Aberto</th>
 							</tr>
 						</thead>
                         <tbody>
@@ -35,6 +36,12 @@
 										href="{{ url('relatorio/' . $relatorio->id . '/edit' )}}">  
 										<i class="glyphicon glyphicon-pencil "></i>
 									</a></td>
+									<td>
+										{{-- fazer um foreach no modulo ti pra iterar os chamados --}}
+										@if ($relatorio->modulo_ti[0]->chamado_aberto == 1)
+											{{-- Colocar icone de alerta --}}
+										@endif
+									</td>
 									
                                 </tr>
                             @endforeach
