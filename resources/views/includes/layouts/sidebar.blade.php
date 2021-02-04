@@ -1,7 +1,7 @@
 <div class="sidebar" data-active-color="" data-background-color="dourado" data-image="{{ asset('img/prefeitura.png') }}">
 	<div class="logo">
 		   <a href="#" class="simple-text logo-normal">
-			  FIQ  <i style="font-size: 8px;">( Ver 0.0.1 )</i>
+			  CIQ  <i style="font-size: 8px;">( Ver 0.0.1 )</i>
 		   </a>
 	</div>
  
@@ -71,7 +71,13 @@
 				<li>
 					<a href="{{ url("/unidade") }}">
 						<i class="material-icons">dashboard</i>
-						<p>Unidade</p>
+						<p>Unidades</p>
+					</a>
+				</li>
+				<li>
+					<a href="{{ url("/funcionario") }}">
+						<i class="material-icons">dashboard</i>
+						<p>Funcionarios</p>
 					</a>
 				</li>
 			@elseif(Auth::user()->nivel == 'user')

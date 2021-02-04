@@ -51,37 +51,34 @@ class RelatorioController extends Controller
     public function update(Request $request, $id)
     {
         
-    
-        $resultados = array_map(null, $request['id'], $request['pergunta_id'],$request['n_chamado'],$request['obs']);
-        //  dd($resultados);
+        // ===================================================MODULO TI=========================================================
+        $resultados_ti = array_map(null, $request['id'], $request['pergunta_id'],$request['n_chamado'],$request['obs']);
 
-        // $results = [];
-
-        foreach($resultados as $resultado) {
-            if($resultado[0] != null && $resultado[2] != null && $resultado[3] != null){
+        foreach($resultados_ti as $resultado_ti) {
+            if($resultado_ti[0] != null && $resultado_ti[2] != null && $resultado_ti[3] != null){
                //Fazer o Update do valor no Banco de dados
                 
-               $update = Modulo_Ti::find($resultado[0]);
-               $update->n_chamado = $resultado[2];
-               $update->obs = $resultado[3];
+               $update = Modulo_Ti::find($resultado_ti[0]);
+               $update->n_chamado = $resultado_ti[2];
+               $update->obs = $resultado_ti[3];
             //    $update->chamado_aberto = 1;   DEFAULT 1
                $update->save();
             
-               // $a = $resultado;
+               // $a = $resultado_ti;
                 // array_push($results,$a);
-            }elseif($resultado[0] == null && $resultado[2] != null && $resultado[3] != null){
+            }elseif($resultado_ti[0] == null && $resultado_ti[2] != null && $resultado_ti[3] != null){
                 //Fazer o Create do Valor no Banco de dados
                 $data = Carbon::now()->subDays(1)->locale('pt_BR')->format('d-m-Y');
                
-                $insert = Modulo_Ti::create(['n_chamado' => $resultado[2], 'obs' => $resultado[3], 'relatorio_id' => $id,'pergunta_id'=> $resultado[1],'data_chamado_aberto' => $data]);
-                
-                // $a = $resultado;
-                // array_push($results,$a);
-                
+                $insert = Modulo_Ti::create(['n_chamado' => $resultado_ti[2], 'obs' => $resultado_ti[3], 'relatorio_id' => $id,'pergunta_id'=> $resultado_ti[1],'data_chamado_aberto' => $data]);            
             }
         }
+        // ===================================================MODULO TI=========================================================
 
-        // dd($results);
+        // ===================================================MODULO INFRAESTRUTURA=============================================
+
+        // ===================================================MODULO INFRAESTRUTURA=============================================
+
 
         return redirect(url('/relatorio'));   
     }

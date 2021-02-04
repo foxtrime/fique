@@ -38,9 +38,14 @@
 									</a></td>
 									<td>
 										{{-- fazer um foreach no modulo ti pra iterar os chamados --}}
-										@if ($relatorio->modulo_ti[0]->chamado_aberto == 1)
-											{{-- Colocar icone de alerta --}}
-										@endif
+										@foreach ($relatorio->modulo_ti as $item)
+											{{-- @if ($relatorio->modulo_ti[0]->chamado_aberto == 1) --}}
+											@if ($item->chamado_aberto == 1)
+												{{-- Colocar icone de alerta --}}
+												<i class="glyphicon glyphicon-alert"></i>
+											@endif
+											{{-- @endif --}}
+										@endforeach
 									</td>
 									
                                 </tr>

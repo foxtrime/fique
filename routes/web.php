@@ -49,6 +49,7 @@ Route::group(['middleware'=>['auth']], function(){
 //==============================RESOURCE====================================
     Route::resource('unidade',		    'UnidadeController');
     Route::resource('relatorio',		'RelatorioController');
+    Route::resource('funcionario',      'FuncionarioController');
 //==========================================================================
 
 });
