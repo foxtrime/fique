@@ -15,8 +15,16 @@ class CreateFuncionariosUnidadesTable extends Migration
     {
         Schema::create('funcionarios_unidades', function (Blueprint $table) {
             $table->id();
+            $table->integer('funcionario_id') ->unsigned();
+            $table->integer('unidade_id')     ->unsigned();
             $table->timestamps();
         });
+
+        Schema::table('funcionarios_unidades', function($table){
+            $table->foreign('unidade_id')->references('id')->on('unidades')->onDelete('cascade');
+            $table->foreign('funcionario_id')->references('id')->on('funcionarios')->onDelete('cascade');
+        });
+
     }
 
     /**

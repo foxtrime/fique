@@ -21,4 +21,9 @@ class Unidade extends Model
     {
         return $this->hasMany('App\Models\Relatorio');
     }
+
+    public function funcionarios()
+    {
+        return $this->belongsToMany('App\Models\Funcionario', 'funcionarios_unidades');
+    }
 }

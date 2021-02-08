@@ -12,4 +12,9 @@ class Funcionario extends Model
        'nome',
        'funcao'
     ];
+
+    public function unidades()
+    {
+        return $this->belongsToMany('App\Models\Unidade','funcionarios_unidades');
+    }
 }

@@ -15,16 +15,30 @@
                 <div class="card-body">
                     <div class="toolbar"></div>
 				<div class="material-datatables">
-					<table id="unidades" class="table table-striped table-no-bordered table-hover" width="100%" style="width:100%">
+					<table id="funcionarios" class="table table-striped table-no-bordered table-hover" width="100%" style="width:100%">
 						<thead>
 							<tr>
-								<th>Nome do Funcionario</th>
+                                <th>Nome do Funcionario</th>
+                                <th>Função</th>
+                                <th>Unidade</th>
 							</tr>
 						</thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                            </tr>
+                            @foreach ($funcionarios as $funcionario)
+                                <tr>
+                                    <td>{{$funcionario->nome}}</td>
+                                    <td>{{$funcionario->funcao}}</td>
+                                    {{-- @if ($funcionario->unidade =! null)
+                                        <td>{{$funcionario->unidades}}</td>
+                                    @else
+                                        <td></td>
+                                    @endif --}}
+                                    @foreach ($funcionario->unidades as $unidade)
+                                        <td>{{$unidade->nome}}</td>
+                                    @endforeach
+                                    
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 				</div>

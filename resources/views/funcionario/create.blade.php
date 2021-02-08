@@ -42,7 +42,7 @@
 									<div class="col-xs-12 col-sm-12 col-md-12">
 										<div class="form-group label-floating has-roxo is-empty">
 											<label class="control-label" style="font-size: 11.7px;">Selecione a Função</label>
-											<select name="funcao" id=funcao class="form-control form-control error" style="position: inherit;" required>
+											<select name="funcao" id="funcao" class="form-control form-control error" style="position: inherit;" required>
 												<option value="" selected> </option>
 												<option value="Médicos 20H">Médicos 20H</option>
 												<option value="Médicos 40H">Médicos 40H</option>
@@ -64,7 +64,7 @@
 							</div>
 						</div>
 						<!-- =========================FIM FUNCÕES========================= -->
-						<!-- ==========================FUNCÕES============================ -->
+						<!-- ==========================UNIDADES============================ -->
 						<div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-6">
 								<div class="input-group-prepend">
@@ -74,10 +74,10 @@
 									<div class="col-xs-12 col-sm-12 col-md-12">
 										<div class="form-group label-floating has-roxo is-empty">
 											<label class="control-label" style="font-size: 11.7px;">Selecione a Unidade</label>
-											<select name="unidade" id=unidade class="form-control form-control error" style="position: inherit;" required>
+											<select name="unidade" id="unidade" class="form-control form-control error" style="position: inherit;" required>
 												<option value="" selected> </option>
 												@foreach ($unidades as $unidade)
-													<option value="{{$unidade}}">{{$unidade->nome}}</option>
+													<option value="{{$unidade->id}}">{{$unidade->nome}}</option>
 												@endforeach
 											</select>
 										</div>
@@ -85,7 +85,7 @@
 								</div>
 							</div>
 						</div>
-						<!-- =========================FIM FUNCÕES========================= -->
+						<!-- =========================FIM UNIDADES========================= -->
 						
 					                        
                     </div>
