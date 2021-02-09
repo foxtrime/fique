@@ -41,8 +41,8 @@ class FuncionarioController extends Controller
 
         return redirect(url('/funcionario'));
 
-
     }
+    
 
 }
 

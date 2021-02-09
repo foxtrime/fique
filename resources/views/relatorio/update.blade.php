@@ -95,12 +95,45 @@
 							@endforeach
 						</div>
 					{{-- Div Ti Fim --}}
-
-					{{-- Div Atenção Basica  --}}
+					
+					{{-- Div Atenção básica (Médicos, enfermeiros e técnicos) --}}
 					<div>
-
+						<h2>Atenção básica (Médicos, enfermeiros e técnicos)</h2>
 					</div>
-					{{-- Div Atenção Basica Fim  --}}
+					{{-- Div Atenção básica (Médicos, enfermeiros e técnicos) Fim  --}}
+
+					{{-- Div Infraestrutura Predial  --}}
+					<div>
+						<h2>Infraestrutura Predial</h2>
+					</div>
+					{{-- Div Infraestrutura Predial Fim  --}}
+
+
+					{{-- Div Almoxarifado  --}}
+					<div>
+						<h2>Almoxarifado</h2>
+					</div>
+					{{-- Div Almoxarifado Fim  --}}
+
+					{{-- Div Odontologia  --}}
+					<div>
+						<h2>Odontologia</h2>
+					</div>
+					{{-- Div Odontologia Fim  --}}
+
+
+					{{-- Div Farmácia  --}}
+					<div>
+						<h2>Farmácia</h2>
+					</div>
+					{{-- Div Farmácia Fim  --}}
+
+
+					{{-- Div Imunização  --}}
+					<div>
+						<h2>Imunização</h2>
+					</div>
+					{{-- Div Imunização Fim  --}}
 
 				<!-- ============================BOTOES============================ -->
 				<div class="row col-md-12 col-sm-12">
