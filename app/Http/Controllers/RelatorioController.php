@@ -7,6 +7,8 @@ use App\Models\Relatorio;
 use App\Models\Unidade;
 use App\Models\Modulo_Ti;
 use App\Models\Ti_Pergunta;
+use App\Models\Modulo_Infraestrutura_Predial;
+use App\Models\Infraestrutura_Pergunta;
 use Carbon\Carbon;
 use Auth;
 
@@ -36,16 +38,21 @@ class RelatorioController extends Controller
 
     public function edit($id)
     {
-
-        $perguntas = Ti_Pergunta::all();
-
         $relatorio = Relatorio::find($id);
 
+        // PERGUNTAS
+        $perguntas = Ti_Pergunta::all();
+        $perguntas_Infraestrutura = Infraestrutura_Pergunta::all();
+
+
+        // MODULOS
         $modulo_ti = Modulo_Ti::where('relatorio_id','=',$relatorio->id)->get();
+        $modulo_infraestrutura_predial = Modulo_infraestrutura_predial::where('relatorio_id_infra','=',$relatorio->id)->get();
+
+        // dd($modulo_infraestrutura_predial);
+
         
-        //  dd($modulo_ti);
-        
-        return view('relatorio.update', compact('relatorio','perguntas','modulo_ti'));
+        return view('relatorio.update', compact('relatorio','perguntas','modulo_ti','perguntas_Infraestrutura','modulo_infraestrutura_predial'));
     }
 
     public function update(Request $request, $id)
@@ -76,7 +83,29 @@ class RelatorioController extends Controller
         // ===================================================MODULO TI=========================================================
 
         // ===================================================MODULO INFRAESTRUTURA=============================================
+        $resultados_infra = array_map(null,$request['id_infra'],$request['pergunta_id_infra'],$request['n_chamado_infra'],$request['obs_infra']);
+        // dd($resultados_infra);  
 
+
+        foreach($resultados_infra as $resultado_infra) {
+            if ($resultado_infra[0] != null && $resultado_infra[2] != null && $resultado_infra[3] != null) {
+                //UPDATE
+
+                $update_infra = Modulo_Infraestrutura_Predial::find($resultados_infra[0]);
+                $update_infra->n_chamado_infra = $resultados_infra[2];
+                $update_infra->obs_infra = $resultados_infra[3];
+
+                $update_infra->save();
+                
+            } elseif($resultado_infra[0] == null && $resultado_infra[2] != null && $resultado_infra[3] != null) {
+                //CREATE
+
+                $data_infra = Carbon::now()->subDays(1)->locale('pt_BR')->format('d-m-Y');
+
+                $insert = Modulo_Infraestrutura_Predial::create(['n_chamado_infra' => $resultado_infra[2], 'obs_infra' => $resultado_infra[3], 'relatorio_id_infra' => $id,'pergunta_id_infra'=> $resultado_infra[1],'data_chamado_aberto_infra' => $data_infra]);
+
+            }
+        }
         // ===================================================MODULO INFRAESTRUTURA=============================================
 
 

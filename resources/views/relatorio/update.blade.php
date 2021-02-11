@@ -105,6 +105,70 @@
 					{{-- Div Infraestrutura Predial  --}}
 					<div>
 						<h2>Infraestrutura Predial</h2>
+						@foreach ($perguntas_Infraestrutura as $pergunta_Infraestrutura)
+							<div class="form-group-{{$pergunta_Infraestrutura->id}}">
+								<label for="exampleFormControlInput1" style="color: black">{{$pergunta_Infraestrutura->titulo}}</label>
+								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_infra{{$pergunta_Infraestrutura->id}}">
+									<i class="material-icons">add</i>
+								</button>
+								<div id="infra_box_{{$pergunta_Infraestrutura->id}}">
+									<div class="infra-box-{{$pergunta_Infraestrutura->id}} row hide" id="infra-box">
+										<div class="form-group box_funcionario ">
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="id_infra" name="id_infra[]" placeholder="N° Chamado" value="">
+											</div>
+										
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="pergunta_id_infra" name="pergunta_id_infra[]" value="{{$pergunta_Infraestrutura->id}}">
+											</div>
+										
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="n_chamado_infra" name="n_chamado_infra[]" placeholder="N° Chamado">
+											</div>
+										
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="obs_infra" name="obs_infra[]" placeholder="Obs">
+											</div>
+											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_infra_{{$pergunta_Infraestrutura->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+											
+											{{-- <button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador{{$pergunta->id}}">
+												<i class="material-icons">add</i>
+											</button> --}}
+										</div>
+									</div>
+								</div>
+								@foreach ($modulo_infraestrutura_predial as $item1)
+									@if ($item1->pergunta_id_infra == $pergunta_Infraestrutura->id)
+										<div class="infra-box-e row" id="infra-box-e">
+											<div class="form-group box_funcionario">
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="id_infra" name="id_infra[]" placeholder="N° Chamado" value="{{$item1->id_infra}}">
+												</div>
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="pergunta_id_infra" name="pergunta_id_infra[]" value="{{$pergunta_Infraestrutura->id}}">
+												</div>
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="n_chamado_infra" name="n_chamado_infra[]" placeholder="N° Chamado" value="{{$item1->n_chamado_infra}}">
+												</div>
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="obs_infra" name="obs_infra[]" placeholder="Obs" value="{{$item1->obs_infra}}">
+												</div>												
+												@if($item1->chamado_aberto_infra == 1)
+													<button type="button" 
+															class="btn btn-success btn-xs action botao_acao btn_control btn_enviar{{$item->id}}"
+															id="btn_enviar{{$item1->id}}"
+															>
+															<i class='glyphicon glyphicon-ok'></i>
+													</button>
+												@endif
+
+											</div>
+										</div>
+									@endif
+								@endforeach
+						
+							</div>
+						@endforeach
 					</div>
 					{{-- Div Infraestrutura Predial Fim  --}}
 
@@ -217,6 +281,7 @@ $(function(){
 				}
 			});
 
+			// --------------------------------------------------------------------------------
 			$('.clonador1').click(function(){
 					$clone = $('.ti-box-1.hide').clone(true);
 					$clone.removeClass('hide');
@@ -270,16 +335,95 @@ $(function(){
 				$('.btn_remove_6').click(function(){
 					$(this).parents('.ti-box-6').remove();
 				});
+				// --------------------------------------------------------------------------------
+				$('.clonador_infra1').click(function(){
+					$clone = $('.infra-box-1.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#infra_box_1').append($clone);
+				});
+				$('.btn_remove_infra_1').click(function(){
+					$(this).parents('.infra-box-1').remove();
+				});
+
+				$('.clonador_infra2').click(function(){
+					$clone = $('.infra-box-2.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#infra_box_2').append($clone);
+				});
+				$('.btn_remove_infra_2').click(function(){
+					$(this).parents('.infra-box-2').remove();
+				});
+
+				$('.clonador_infra3').click(function(){
+					$clone = $('.infra-box-3.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#infra_box_3').append($clone);
+				});
+				$('.btn_remove_infra_3').click(function(){
+					$(this).parents('.infra-box-3').remove();
+				});
+
+				$('.clonador_infra4').click(function(){
+					$clone = $('.infra-box-4.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#infra_box_4').append($clone);
+				});
+				$('.btn_remove_infra_4').click(function(){
+					$(this).parents('.infra-box-4').remove();
+				});
+
+				$('.clonador_infra5').click(function(){
+					$clone = $('.infra-box-5.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#infra_box_5').append($clone);
+				});
+				$('.btn_remove_infra_5').click(function(){
+					$(this).parents('.infra-box-5').remove();
+				});
+
+				$('.clonador_infra6').click(function(){
+					$clone = $('.infra-box-6.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#infra_box_6').append($clone);
+				});
+				$('.btn_remove_infra_6').click(function(){
+					$(this).parents('.infra-box-6').remove();
+				});
+
+				$('.clonador_infra7').click(function(){
+					$clone = $('.infra-box-7.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#infra_box_7').append($clone);
+				});
+				$('.btn_remove_infra_7').click(function(){
+					$(this).parents('.infra-box-7').remove();
+				});
+
+				// --------------------------------------------------------------------------------
 
 
-				// $('.clonador2').click(function(){
-				// 	$clone = $('.ti-box-2.hide').clone(true);
-				// 	$clone.removeClass('hide');
-				// 	$('#ti_box_2').append($clone);
-				// });
-				// $('.btn_remove').click(function(){
-				// 	$(this).parents('.ti-box').remove();
-				// });
+
+
+				// --------------------------------------------------------------------------------
+
+
+
+
+				// --------------------------------------------------------------------------------
+
+
+
+
+				// --------------------------------------------------------------------------------
+
+
+
+
+				// --------------------------------------------------------------------------------
+
+			
+
+
 
 
 			$("#btn_cancelar").click(function(){

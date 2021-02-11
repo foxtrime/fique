@@ -23,5 +23,10 @@ class Relatorio extends Model
         return $this->hasMany('App\Models\Modulo_Ti');
     }
 
+    public function modulo_infraestrutura_predial()
+    {
+        return $this->hasMany('App\Models\Modulo_Infraestrutura_Predial');
+    }
+
 
 }
