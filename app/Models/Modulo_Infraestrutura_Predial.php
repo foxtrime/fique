@@ -8,8 +8,9 @@ class Modulo_Infraestrutura_Predial extends Model
 {
     protected $table = "modulos_infraestrutura_predial";
 
+    public $primaryKey = 'id_infra';
+    
     protected $fillable = [
-        'id_infra',
         'n_chamado_infra',
         'obs_infra',
         'chamado_aberto_infra',

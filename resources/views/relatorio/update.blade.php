@@ -155,7 +155,7 @@
 												</div>												
 												@if($item1->chamado_aberto_infra == 1)
 													<button type="button" 
-															class="btn btn-success btn-xs action botao_acao btn_control btn_enviar{{$item->id}}"
+															class="btn btn-success btn-xs action botao_acao btn_control btn_enviar{{$item1->id}}"
 															id="btn_enviar{{$item1->id}}"
 															>
 															<i class='glyphicon glyphicon-ok'></i>

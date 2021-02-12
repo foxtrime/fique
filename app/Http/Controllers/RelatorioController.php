@@ -64,11 +64,11 @@ class RelatorioController extends Controller
         foreach($resultados_ti as $resultado_ti) {
             if($resultado_ti[0] != null && $resultado_ti[2] != null && $resultado_ti[3] != null){
                //Fazer o Update do valor no Banco de dados
-                
+
                $update = Modulo_Ti::find($resultado_ti[0]);
                $update->n_chamado = $resultado_ti[2];
                $update->obs = $resultado_ti[3];
-            //    $update->chamado_aberto = 1;   DEFAULT 1
+                //    $update->chamado_aberto = 1;   DEFAULT 1
                $update->save();
             
                // $a = $resultado_ti;
@@ -84,19 +84,20 @@ class RelatorioController extends Controller
 
         // ===================================================MODULO INFRAESTRUTURA=============================================
         $resultados_infra = array_map(null,$request['id_infra'],$request['pergunta_id_infra'],$request['n_chamado_infra'],$request['obs_infra']);
-        // dd($resultados_infra);  
+        // dd($resultados_infra);
 
 
         foreach($resultados_infra as $resultado_infra) {
             if ($resultado_infra[0] != null && $resultado_infra[2] != null && $resultado_infra[3] != null) {
                 //UPDATE
-
-                $update_infra = Modulo_Infraestrutura_Predial::find($resultados_infra[0]);
-                $update_infra->n_chamado_infra = $resultados_infra[2];
-                $update_infra->obs_infra = $resultados_infra[3];
-
-                $update_infra->save();
                 
+                //dd($resultado_infra[0]);
+                $update_infra = Modulo_Infraestrutura_Predial::find($resultado_infra[0]);
+                $update_infra->n_chamado_infra = $resultado_infra[2];
+                $update_infra->obs_infra = $resultado_infra[3];
+               
+                $update_infra->save();
+               
             } elseif($resultado_infra[0] == null && $resultado_infra[2] != null && $resultado_infra[3] != null) {
                 //CREATE
 
