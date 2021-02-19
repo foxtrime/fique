@@ -5,10 +5,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Relatorio;
 use App\Models\Unidade;
-use App\Models\Modulo_Ti;
-use App\Models\Ti_Pergunta;
 use App\Models\Modulo_Infraestrutura_Predial;
+use App\Models\Modulo_Ti;
+use App\Models\Modulo_Atencao_Basica;
+
+use App\Models\Ti_Pergunta;
 use App\Models\Infraestrutura_Pergunta;
+use App\Models\Atencao_Basica_Pergunta;
+
 use Carbon\Carbon;
 use Auth;
 
@@ -43,16 +47,19 @@ class RelatorioController extends Controller
         // PERGUNTAS
         $perguntas = Ti_Pergunta::all();
         $perguntas_Infraestrutura = Infraestrutura_Pergunta::all();
+        $perguntas_atencao_basica = Atencao_Basica_Pergunta::all();
 
+        dd($perguntas_atencao_basica);
 
         // MODULOS
         $modulo_ti = Modulo_Ti::where('relatorio_id','=',$relatorio->id)->get();
         $modulo_infraestrutura_predial = Modulo_infraestrutura_predial::where('relatorio_id_infra','=',$relatorio->id)->get();
+        // $modulo_atencao_basica = Modulo_Atencao_Basica::where('relatorio_id_at_basi','=',$relatorio->id)->get();
 
         // dd($modulo_infraestrutura_predial);
 
         
-        return view('relatorio.update', compact('relatorio','perguntas','modulo_ti','perguntas_Infraestrutura','modulo_infraestrutura_predial'));
+        return view('relatorio.update', compact('relatorio','perguntas','modulo_ti','perguntas_Infraestrutura','modulo_infraestrutura_predial','perguntas_atencao_basica'));
     }
 
     public function update(Request $request, $id)
@@ -68,11 +75,11 @@ class RelatorioController extends Controller
                $update = Modulo_Ti::find($resultado_ti[0]);
                $update->n_chamado = $resultado_ti[2];
                $update->obs = $resultado_ti[3];
-                //    $update->chamado_aberto = 1;   DEFAULT 1
+                //$update->chamado_aberto = 1;   DEFAULT 1
                $update->save();
             
-               // $a = $resultado_ti;
-                // array_push($results,$a);
+                //$a = $resultado_ti;
+                //array_push($results,$a);
             }elseif($resultado_ti[0] == null && $resultado_ti[2] != null && $resultado_ti[3] != null){
                 //Fazer o Create do Valor no Banco de dados
                 $data = Carbon::now()->subDays(1)->locale('pt_BR')->format('d-m-Y');
@@ -108,6 +115,9 @@ class RelatorioController extends Controller
             }
         }
         // ===================================================MODULO INFRAESTRUTURA=============================================
+
+
+
 
 
         return redirect(url('/relatorio'));   

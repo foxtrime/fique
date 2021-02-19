@@ -14,7 +14,7 @@ class CreateAlmoxarifadoPerguntasTable extends Migration
     public function up()
     {
         Schema::create('almoxarifado_perguntas', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('titulo');
             $table->timestamps();
         });

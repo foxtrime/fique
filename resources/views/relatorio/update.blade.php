@@ -76,17 +76,6 @@
 															<i class='glyphicon glyphicon-ok'></i>
 													</button>
 												@endif
-
-												{{-- <button type="button" 
-														class="btn btn-primary btn-fab btn-fab-mini btn-round btn_enviar"
-														data-toggle='tooltip'
-														data-placement='bottom'
-														title='Se o Chamado estiver resolvido Clique Aqui'
-														data-relatorio ='".$item->id."'>
-													<i class="fa fa-check" aria-hidden="true"></i>
-												</button> --}}
-
-
 											</div>
 										</div>
 										@endif
@@ -99,6 +88,50 @@
 					{{-- Div Atenção básica (Médicos, enfermeiros e técnicos) --}}
 					<div>
 						<h2>Atenção básica (Médicos, enfermeiros e técnicos)</h2>
+						<div class="form-group">
+							<label for="exampleFormControlInput1" style="color: black"></label>
+							<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round ">
+								<i class="material-icons">add</i>
+							</button>
+							<div id="infra_box_">
+								<div class="infra-box- row" id="infra-box">
+									<div class="form-group box_funcionario">
+										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+											<input type="text" class="form-control" id="id_at_basi" name="id_at_basi[]" placeholder="N° Chamado" value="">
+										</div>
+
+										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+											<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="">
+										</div>
+
+										{{-- Aqui vai entrar o nominal do maluco --}}
+										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+											<div class="form-group ">
+												<label for="inputState">Funcionario</label>
+												<select id="inputState" class="form-control">
+												  <option selected>Selecione um Funcionario</option>
+												  <option>...</option>
+												  <option>...</option>
+												  <option>...</option>
+												</select>
+											</div>
+										</div>
+										
+
+										
+
+										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+											<input type="text" class="form-control" id="at_basi" name="at_basi[]" placeholder="Obs">
+										</div>
+										<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control"><i class='glyphicon glyphicon-trash'></i></button>
+										
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+
 					</div>
 					{{-- Div Atenção básica (Médicos, enfermeiros e técnicos) Fim  --}}
 

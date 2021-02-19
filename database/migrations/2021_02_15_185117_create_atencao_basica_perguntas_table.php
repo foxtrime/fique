@@ -14,7 +14,7 @@ class CreateAtencaoBasicaPerguntasTable extends Migration
     public function up()
     {
         Schema::create('atencao_basica_perguntas', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('titulo');
             $table->timestamps();
         });

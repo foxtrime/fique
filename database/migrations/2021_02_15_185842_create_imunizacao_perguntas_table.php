@@ -14,7 +14,7 @@ class CreateImunizacaoPerguntasTable extends Migration
     public function up()
     {
         Schema::create('imunizacao_perguntas', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('titulo');
             $table->timestamps();
         });
