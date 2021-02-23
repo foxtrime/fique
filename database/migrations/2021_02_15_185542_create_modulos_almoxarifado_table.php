@@ -15,8 +15,22 @@ class CreateModulosAlmoxarifadoTable extends Migration
     {
         Schema::create('modulos_almoxarifado', function (Blueprint $table) {
             $table->increments('id_almo');
+
+            $table->string('qtd_falta_almo') ->nullable();
+            $table->string('obs_almo') ->nullable();
+
             $table->timestamps();
+
+            $table->integer('relatorio_id_almo')->unsigned();
+            $table->integer('pergunta_id_almo')->unsigned();
         });
+
+        Schema::table('modulos_almoxarifado', function($table){
+            $table->foreign('pergunta_id_almo')->references('id')->on('almoxarifado_perguntas');
+            $table->foreign('relatorio_id_almo')->references('id')->on('relatorios');
+        });
+
+
     }
 
     /**

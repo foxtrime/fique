@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Odontologia_Pergunta extends Model
 {
-    protected $table = "ondontologia_perguntas";
+    protected $table = "odontologia_perguntas";
 
     protected $fillable = [
         'titulo',

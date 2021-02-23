@@ -88,7 +88,7 @@
 					{{-- Div Atenção básica (Médicos, enfermeiros e técnicos) --}}
 					<div>
 						<h2>Atenção básica (Médicos, enfermeiros e técnicos)</h2>
-						<div class="form-group">
+						{{-- <div class="form-group">
 							<label for="exampleFormControlInput1" style="color: black"></label>
 							<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round ">
 								<i class="material-icons">add</i>
@@ -104,7 +104,6 @@
 											<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="">
 										</div>
 
-										{{-- Aqui vai entrar o nominal do maluco --}}
 										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
 											<div class="form-group ">
 												<label for="inputState">Funcionario</label>
@@ -116,20 +115,14 @@
 												</select>
 											</div>
 										</div>
-										
-
-										
-
 										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
 											<input type="text" class="form-control" id="at_basi" name="at_basi[]" placeholder="Obs">
 										</div>
 										<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control"><i class='glyphicon glyphicon-trash'></i></button>
-										
-
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> --}}
 
 
 					</div>
@@ -199,7 +192,6 @@
 										</div>
 									@endif
 								@endforeach
-						
 							</div>
 						@endforeach
 					</div>
@@ -209,12 +201,49 @@
 					{{-- Div Almoxarifado  --}}
 					<div>
 						<h2>Almoxarifado</h2>
+						@foreach ($perguntas_almoxarifado as $pergunta_almoxarifado)
+							<div class="form-group-{{$pergunta_almoxarifado->id}}">
+								<label for="exampleFormControlInput1" style="color: black">{{$pergunta_almoxarifado->titulo}}</label>
+								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_almo{{$pergunta_almoxarifado->id}}">
+									<i class="material-icons">add</i>
+								</button>
+								<div id="almo_box_{{$pergunta_almoxarifado->id}}">
+									<div class="almo-box-{{$pergunta_almoxarifado->id}} row hide" id="almo-box">
+										<div class="form-group box_funcionario">
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text">
+											</div>
+											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_almo_{{$pergunta_almoxarifado->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						@endforeach
 					</div>
 					{{-- Div Almoxarifado Fim  --}}
 
 					{{-- Div Odontologia  --}}
 					<div>
 						<h2>Odontologia</h2>
+						@foreach ($perguntas_odontologia as $pergunta_odontologia)
+							<div class="form-group-{{$pergunta_odontologia->id}}">
+								<label for="exampleFormControlInput1" style="color: black">{{$pergunta_odontologia->titulo}}</label>
+								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_odonto{{$pergunta_odontologia->id}}">
+									<i class="material-icons">add</i>
+								</button>
+								<div id="odonto_box_{{$pergunta_odontologia->id}}">
+									<div class="odonto-box-{{$pergunta_odontologia->id}} row hide" id="odonto-box">
+										<div class="form-group box_funcionario">
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text">
+											</div>
+											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_odonto_{{$pergunta_odontologia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+										</div>
+									</div>
+								</div>
+							</div>
+						@endforeach
 					</div>
 					{{-- Div Odontologia Fim  --}}
 
@@ -222,6 +251,17 @@
 					{{-- Div Farmácia  --}}
 					<div>
 						<h2>Farmácia</h2>
+						@foreach ($perguntas_farmacia as $pergunta_farmacia)
+						<div class="form-group-{{$pergunta_farmacia->id}}">
+							<label for="exampleFormControlInput1" style="color: black">{{$pergunta_farmacia->titulo}}</label>
+							<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_farmacia{{$pergunta_farmacia->id}}">
+								<i class="material-icons">add</i>
+							</button>
+							<div id="Farmacia_box_{{$pergunta_farmacia->id}}">
+								<div class="Farmacia-box-{{$pergunta_farmacia->id}} row hide" id="Farmacia-box"></div>
+							</div>
+						</div>
+						@endforeach
 					</div>
 					{{-- Div Farmácia Fim  --}}
 
@@ -229,6 +269,17 @@
 					{{-- Div Imunização  --}}
 					<div>
 						<h2>Imunização</h2>
+						@foreach ($perguntas_imunizacao as $pergunta_imunizacao)
+							<div class="form-group-{{$pergunta_imunizacao->id}}">
+								<label for="exampleFormControlInput1" style="color: black">{{$pergunta_imunizacao->titulo}}</label>
+								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_imuni{{$pergunta_imunizacao->id}}">
+									<i class="material-icons">add</i>
+								</button>
+								<div id="Imuni_box_{{$pergunta_imunizacao->id}}">
+									<div class="{{$pergunta_imunizacao->id}} row hide" id="Imuni-box"></div>
+								</div>
+							</div>
+						@endforeach
 					</div>
 					{{-- Div Imunização Fim  --}}
 
@@ -315,7 +366,7 @@ $(function(){
 			});
 
 			// --------------------------------------------------------------------------------
-			$('.clonador1').click(function(){
+				$('.clonador1').click(function(){
 					$clone = $('.ti-box-1.hide').clone(true);
 					$clone.removeClass('hide');
 					$('#ti_box_1').append($clone);
@@ -434,22 +485,114 @@ $(function(){
 
 				// --------------------------------------------------------------------------------
 
+				$('.clonador_almo1').click(function(){
+					$clone = $('.almo-box-1.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#almo_box_1').append($clone);
+				});
+				$('.btn_remove_almo_1').click(function(){
+					$(this).parents('.almo-box-1').remove();
+				});
+
+				$('.clonador_almo2').click(function(){
+					$clone = $('.almo-box-2.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#almo_box_2').append($clone);
+				});
+				$('.btn_remove_almo_2').click(function(){
+					$(this).parents('.almo-box-2').remove();
+				});
+
+				$('.clonador_almo3').click(function(){
+					$clone = $('.almo-box-3.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#almo_box_3').append($clone);
+				});
+				$('.btn_remove_almo_3').click(function(){
+					$(this).parents('.almo-box-3').remove();
+				});
 
 
 
 				// --------------------------------------------------------------------------------
 
-
+				$('.clonador_odonto1').click(function(){
+					$clone = $('.odonto-box-1.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#odonto_box_1').append($clone);
+				});
+				$('.btn_remove_odonto_1').click(function(){
+					$(this).parents('.odonto-box-1').remove();
+				});
 
 
 				// --------------------------------------------------------------------------------
 
+				$('.clonador_farmacia1').click(function(){
+					$clone = $('.ti-box-1.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#ti_box_1').append($clone);
+				});
+				$('.btn_remove_1').click(function(){
+					$(this).parents('.ti-box-1').remove();
+				});
 
+				$('.clonador_farmacia2').click(function(){
+					$clone = $('.ti-box-2.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#ti_box_2').append($clone);
+				});
+				$('.btn_remove_2').click(function(){
+					$(this).parents('.ti-box-2').remove();
+				});
+
+				$('.clonador_farmacia3').click(function(){
+					$clone = $('.ti-box-3.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#ti_box_3').append($clone);
+				});
+				$('.btn_remove_3').click(function(){
+					$(this).parents('.ti-box-3').remove();
+				});
+
+				$('.clonador_farmacia4').click(function(){
+					$clone = $('.ti-box-4.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#ti_box_4').append($clone);
+				});
+				$('.btn_remove_4').click(function(){
+					$(this).parents('.ti-box-4').remove();
+				});
+
+				$('.clonador_farmacia5').click(function(){
+					$clone = $('.ti-box-5.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#ti_box_5').append($clone);
+				});
+				$('.btn_remove_5').click(function(){
+					$(this).parents('.ti-box-5').remove();
+				});
 
 
 				// --------------------------------------------------------------------------------
 
+				$('.clonador_imuni1').click(function(){
+					$clone = $('.ti-box-1.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#ti_box_1').append($clone);
+				});
+				$('.btn_remove_1').click(function(){
+					$(this).parents('.ti-box-1').remove();
+				});
 
+				$('.clonador_imuni2').click(function(){
+					$clone = $('.ti-box-2.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#ti_box_2').append($clone);
+				});
+				$('.btn_remove_2').click(function(){
+					$(this).parents('.ti-box-2').remove();
+				});
 
 
 				// --------------------------------------------------------------------------------

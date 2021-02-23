@@ -14,5 +14,10 @@ class DatabaseSeeder extends Seeder
         // $this->call(UserSeeder::class);
         // $this->call(Infraestrutura_PerguntaSeeder::class);
         // $this->call(Ti_PerguntaSeeder::class);
+        // $this->call(Almoxarifado_PerguntaSeeder::class);
+        // $this->call(Atencao_Basica_PerguntaSeeder::class);
+        // $this->call(Farmacia_PerguntaSeeder::class);
+        // $this->call(Imunizacao_PerguntaSeeder::class);
+        // $this->call(Odontologia_PerguntaSeeder::class);
     }
 }

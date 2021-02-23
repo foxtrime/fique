@@ -11,6 +11,7 @@ class Imunizacao_PerguntaSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('imunizacao_perguntas')->insert(['titulo' => '']);
+        DB::table('imunizacao_perguntas')->insert(['titulo' => 'Falta de material - Insumo']);
+        DB::table('imunizacao_perguntas')->insert(['titulo' => 'Todas as vacinas estão completas?']);
     }
 }

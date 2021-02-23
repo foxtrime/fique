@@ -5,13 +5,21 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Relatorio;
 use App\Models\Unidade;
-use App\Models\Modulo_Infraestrutura_Predial;
 use App\Models\Modulo_Ti;
 use App\Models\Modulo_Atencao_Basica;
+use App\Models\Modulo_Infraestrutura_Predial;
+use App\Models\Modulo_Almoxarifado;
+use App\Models\Modulo_Farmacia;
+use App\Models\Modulo_Imunizacao;
+use App\Models\Modulo_Odontologia;
 
 use App\Models\Ti_Pergunta;
-use App\Models\Infraestrutura_Pergunta;
+use App\Models\Farmacia_Pergunta;
+use App\Models\Imunizacao_Pergunta;
+use App\Models\Odontologia_Pergunta;
+use App\Models\Almoxarifado_Pergunta;
 use App\Models\Atencao_Basica_Pergunta;
+use App\Models\Infraestrutura_Pergunta;
 
 use Carbon\Carbon;
 use Auth;
@@ -48,18 +56,24 @@ class RelatorioController extends Controller
         $perguntas = Ti_Pergunta::all();
         $perguntas_Infraestrutura = Infraestrutura_Pergunta::all();
         $perguntas_atencao_basica = Atencao_Basica_Pergunta::all();
-
-        dd($perguntas_atencao_basica);
+        $perguntas_almoxarifado = Almoxarifado_Pergunta::all();
+        $perguntas_farmacia = Farmacia_Pergunta::all();
+        $perguntas_imunizacao = Imunizacao_Pergunta::all();
+        $perguntas_odontologia = Odontologia_Pergunta::all();
 
         // MODULOS
         $modulo_ti = Modulo_Ti::where('relatorio_id','=',$relatorio->id)->get();
         $modulo_infraestrutura_predial = Modulo_infraestrutura_predial::where('relatorio_id_infra','=',$relatorio->id)->get();
         // $modulo_atencao_basica = Modulo_Atencao_Basica::where('relatorio_id_at_basi','=',$relatorio->id)->get();
+        $modulo_almoxarifado = Modulo_Almoxarifado::where('relatorio_id_almo','=',$relatorio->id)->get();
+        // $modulo_farmacia = Modulo_Farmacia::where('relatorio_id_far','=',$relatorio->id)->get();
+        $modulo_imunizacao = Modulo_Imunizacao::where('relatorio_id_imuni','=',$relatorio->id)->get();
+        // $modulo_odontologia = Modulo_Odontologia::where('relatorio_id_odonto','=',$relatorio->id)->get();
 
         // dd($modulo_infraestrutura_predial);
 
         
-        return view('relatorio.update', compact('relatorio','perguntas','modulo_ti','perguntas_Infraestrutura','modulo_infraestrutura_predial','perguntas_atencao_basica'));
+        return view('relatorio.update', compact('relatorio','perguntas','modulo_ti','perguntas_Infraestrutura','perguntas_almoxarifado','perguntas_farmacia','perguntas_imunizacao','perguntas_odontologia','modulo_infraestrutura_predial','perguntas_atencao_basica'));
     }
 
     public function update(Request $request, $id)

@@ -11,6 +11,8 @@ class Almoxarifado_PerguntaSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('almoxarifado_perguntas')->insert(['titulo' => '']);
+        DB::table('almoxarifado_perguntas')->insert(['titulo' => 'Falta de material - Insumo']);
+        DB::table('almoxarifado_perguntas')->insert(['titulo' => 'Falta de material - Limpeza']);
+        DB::table('almoxarifado_perguntas')->insert(['titulo' => 'Falta de material - Escritório']);
     }
 }
