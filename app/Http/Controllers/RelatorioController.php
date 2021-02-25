@@ -12,6 +12,7 @@ use App\Models\Modulo_Almoxarifado;
 use App\Models\Modulo_Farmacia;
 use App\Models\Modulo_Imunizacao;
 use App\Models\Modulo_Odontologia;
+use App\Models\Funcionario;
 
 use App\Models\Ti_Pergunta;
 use App\Models\Farmacia_Pergunta;
@@ -52,6 +53,10 @@ class RelatorioController extends Controller
     {
         $relatorio = Relatorio::find($id);
 
+        $funcionarios = Funcionario::all();
+
+        // dd($funcionarios);
+
         // PERGUNTAS
         $perguntas = Ti_Pergunta::all();
         $perguntas_Infraestrutura = Infraestrutura_Pergunta::all();
@@ -73,7 +78,7 @@ class RelatorioController extends Controller
         // dd($modulo_infraestrutura_predial);
 
         
-        return view('relatorio.update', compact('relatorio','perguntas','modulo_ti','perguntas_Infraestrutura','perguntas_almoxarifado','perguntas_farmacia','perguntas_imunizacao','perguntas_odontologia','modulo_infraestrutura_predial','perguntas_atencao_basica'));
+        return view('relatorio.update', compact('relatorio','funcionarios','perguntas','modulo_ti','perguntas_Infraestrutura','perguntas_almoxarifado','perguntas_farmacia','perguntas_imunizacao','perguntas_odontologia','modulo_infraestrutura_predial','perguntas_atencao_basica'));
     }
 
     public function update(Request $request, $id)
