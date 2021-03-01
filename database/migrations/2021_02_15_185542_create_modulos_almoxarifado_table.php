@@ -16,8 +16,8 @@ class CreateModulosAlmoxarifadoTable extends Migration
         Schema::create('modulos_almoxarifado', function (Blueprint $table) {
             $table->increments('id_almo');
 
-            $table->string('qtd_falta_almo') ->nullable();
-            $table->string('obs_almo') ->nullable();
+            $table->string('material_almo') ->nullable();
+            $table->string('qtd_almo') ->nullable();
 
             $table->timestamps();
 

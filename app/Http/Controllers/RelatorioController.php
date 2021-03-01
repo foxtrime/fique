@@ -75,10 +75,10 @@ class RelatorioController extends Controller
         $modulo_imunizacao = Modulo_Imunizacao::where('relatorio_id_imuni','=',$relatorio->id)->get();
         // $modulo_odontologia = Modulo_Odontologia::where('relatorio_id_odonto','=',$relatorio->id)->get();
 
-        // dd($modulo_infraestrutura_predial);
+        //dd($modulo_almoxarifado);
 
         
-        return view('relatorio.update', compact('relatorio','funcionarios','perguntas','modulo_ti','perguntas_Infraestrutura','perguntas_almoxarifado','perguntas_farmacia','perguntas_imunizacao','perguntas_odontologia','modulo_infraestrutura_predial','perguntas_atencao_basica'));
+        return view('relatorio.update', compact('relatorio','funcionarios','perguntas','modulo_ti','perguntas_Infraestrutura','perguntas_almoxarifado','perguntas_farmacia','perguntas_imunizacao','perguntas_odontologia','modulo_infraestrutura_predial','perguntas_atencao_basica','modulo_almoxarifado'));
     }
 
     public function update(Request $request, $id)
@@ -135,6 +135,30 @@ class RelatorioController extends Controller
         }
         // ===================================================MODULO INFRAESTRUTURA=============================================
 
+        
+        // ===================================================MODULO ALMOXARIFADO================================================
+        $resultados_almo = array_map(null, $request['id_almo'],$request['pergunta_id_almo'],$request['material_almo'],$request['qtd_almo']);
+        // dd($resultados_almo);
+
+        foreach($resultados_almo as $resultado_almo) {
+            if($resultado_almo[0] != null && $resultado_almo[2] != null && $resultado_almo[3] != null){
+                //UPDATE
+                $update_almo = Modulo_Almoxarifado::find($resultado_almo[0]);
+                $update_almo->material_almo = $resultado_almo[2];
+                $update_almo->qtd_almo = $resultado_almo[3];
+
+                $update_almo->save();
+
+
+            }elseif($resultado_almo[0] == null && $resultado_almo[2] != null && $resultado_almo[3] != null){
+                //CREATE
+
+              
+                $insert = Modulo_Almoxarifado::create(['material_almo' => $resultado_almo[2], 'qtd_almo' => $resultado_almo[3], 'relatorio_id_almo' => $id, 'pergunta_id_almo' => $resultado_almo[1]]);
+                
+            }
+        }
+        // ===================================================MODULO ALMOXARIFADO================================================
 
 
 

@@ -210,13 +210,45 @@
 								<div id="almo_box_{{$pergunta_almoxarifado->id}}">
 									<div class="almo-box-{{$pergunta_almoxarifado->id}} row hide" id="almo-box">
 										<div class="form-group box_funcionario">
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text">
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="id_almo" name="id_almo[]" value="">
 											</div>
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="pergunta_id_almo" name="pergunta_id_almo[]" value="{{$pergunta_almoxarifado->id}}">
+											</div>
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="material_almo" name="material_almo[]" placeholder="Material" value="">
+												</div>
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="qtd_almo" name="qtd_almo[]" placeholder="Quantidade" value="">
+												</div>
 											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_almo_{{$pergunta_almoxarifado->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
 										</div>
 									</div>
 								</div>
+								@foreach ($modulo_almoxarifado as $item2)
+									@if ($item2->pergunta_id_almo == $pergunta_almoxarifado->id)
+										<div class="almo-box-e row" id="almo-box-e">
+											<div class="form-group box_funcionario">
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="id_almo" name="id_almo[]" value="{{$item2->id_almo}}">
+												</div>
+												
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="pergunta_id_almo" name="pergunta_id_almo[]" value="{{$pergunta_almoxarifado->id}}">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="material_almo" name="material_almo[]" placeholder="Material" value="{{$item2->material_almo}}">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="qtd_almo" name="qtd_almo[]" placeholder="Quantidade" value="{{$item2->qtd_almo}}">
+												</div>
+											</div>
+										</div>
+									@endif
+								@endforeach
 
 							</div>
 						@endforeach

@@ -11,8 +11,8 @@ class Modulo_Almoxarifado extends Model
     public $primaryKey = 'id_almo';
 
     protected $fillable = [
-        'qtd_falta_imuni',
-        'obs_imuni',
+        'material_almo',
+        'qtd_almo',
         'relatorio_id_almo',
         'pergunta_id_almo',
     ];
