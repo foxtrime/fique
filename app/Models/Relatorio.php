@@ -38,5 +38,10 @@ class Relatorio extends Model
         return $this->hasMany('App\Models\Modulo_Almoxarifado');
     }
 
+    public function modulo_atencao_basica()
+    {
+        return $this->hasMany('App\Models\Modulo_Atencao_Basica');
+    }
+
 
 }

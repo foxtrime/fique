@@ -69,7 +69,7 @@ class RelatorioController extends Controller
         // MODULOS
         $modulo_ti = Modulo_Ti::where('relatorio_id','=',$relatorio->id)->get();
         $modulo_infraestrutura_predial = Modulo_infraestrutura_predial::where('relatorio_id_infra','=',$relatorio->id)->get();
-        // $modulo_atencao_basica = Modulo_Atencao_Basica::where('relatorio_id_at_basi','=',$relatorio->id)->get();
+        $modulo_atencao_basica = Modulo_Atencao_Basica::where('relatorio_id_at_basi','=',$relatorio->id)->get();
         $modulo_almoxarifado = Modulo_Almoxarifado::where('relatorio_id_almo','=',$relatorio->id)->get();
         // $modulo_farmacia = Modulo_Farmacia::where('relatorio_id_far','=',$relatorio->id)->get();
         $modulo_imunizacao = Modulo_Imunizacao::where('relatorio_id_imuni','=',$relatorio->id)->get();
@@ -78,7 +78,7 @@ class RelatorioController extends Controller
         //dd($modulo_almoxarifado);
 
         
-        return view('relatorio.update', compact('relatorio','funcionarios','perguntas','modulo_ti','perguntas_Infraestrutura','perguntas_almoxarifado','perguntas_farmacia','perguntas_imunizacao','perguntas_odontologia','modulo_infraestrutura_predial','perguntas_atencao_basica','modulo_almoxarifado'));
+        return view('relatorio.update', compact('relatorio','funcionarios','perguntas','modulo_ti','perguntas_Infraestrutura','perguntas_almoxarifado','perguntas_farmacia','perguntas_imunizacao','perguntas_odontologia','modulo_infraestrutura_predial','perguntas_atencao_basica','modulo_almoxarifado','modulo_imunizacao','modulo_atencao_basica'));
     }
 
     public function update(Request $request, $id)
@@ -153,14 +153,55 @@ class RelatorioController extends Controller
             }elseif($resultado_almo[0] == null && $resultado_almo[2] != null && $resultado_almo[3] != null){
                 //CREATE
 
-              
                 $insert = Modulo_Almoxarifado::create(['material_almo' => $resultado_almo[2], 'qtd_almo' => $resultado_almo[3], 'relatorio_id_almo' => $id, 'pergunta_id_almo' => $resultado_almo[1]]);
                 
             }
         }
         // ===================================================MODULO ALMOXARIFADO================================================
 
+        
+        // ====================================================MODULO IMUNIZACAO=================================================
+            $resultados_imuni = array_map(null,$request['id_imuni'],$request['pergunta_id_imuni'],$request['material_imuni'],$request['qtd_imuni']);
 
+            foreach($resultados_imuni as $resultado_imuni){
+                if ($resultado_imuni[0] != null && $resultado_imuni[2] != null && $resultado_imuni[3] != null) {
+                    //UPDATE
+                    $update_imuni = Modulo_Imunizacao::find($resultado_imuni[0]);
+                    $update_imuni->material_imuni = $resultado_imuni[2];
+                    $update_imuni->qtd_imuni = $resultado_imuni[3];
+
+                    $update_imuni->save();
+
+                } elseif($resultado_imuni[0] == null && $resultado_imuni[2] != null && $resultado_imuni[3] != null) {
+                    //CREATE
+                    $insert = Modulo_Imunizacao::create(['material_imuni' => $resultado_imuni[2], 'qtd_imuni' => $resultado_imuni[3], 'relatorio_id_imuni' => $id, 'pergunta_id_imuni' => $resultado_imuni[1]]);
+                }
+                
+            }
+        // ====================================================MODULO IMUNIZACAO=================================================
+        
+
+        //=====================================================MODULO ATENCAO BASICA=============================================
+            $resultados_at_basi = array_map(null,$request['id_at_basi'],$request['pergunta_id_at_basi'],$request['nome_at_basi'],$request['descri_at_basi']);
+            // dd($resultados_at_basi);
+            // $resultados_at_basi = array_map(null,$request['id_at_basi'],$request['pergunta_id_at_basi'],$request['nome_at_basi'],$request['descri_at_basi']);
+
+            foreach($resultados_at_basi as $resultado_at_basi){
+                if ($resultado_at_basi[0] != null && $resultado_at_basi[2] != null && $resultado_at_basi[3] != null){
+
+                    $update_at_basi = Modulo_Atencao_Basica::find($resultado_at_basi[0]);
+                    $update_at_basi->nome_at_basi = $resultado_at_basi[2];
+                    $update_at_basi->descri_at_basi = $resultado_at_basi[3];
+
+                    $update_at_basi->save();   
+
+                } elseif($resultado_at_basi[0] == null && $resultado_at_basi[2] != null && $resultado_at_basi[3] != null){
+                    //CREATE
+                    $insert = Modulo_Atencao_Basica::create(['nome_at_basi' => $resultado_at_basi[2], 'descri_at_basi' => $resultado_at_basi[3], 'relatorio_id_at_basi' => $id, 'pergunta_id_at_basi' => $resultado_at_basi[1]]);
+                }
+            }
+        
+        //=====================================================MODULO ATENCAO BASICA=============================================
 
 
         return redirect(url('/relatorio'));   

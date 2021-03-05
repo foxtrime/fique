@@ -16,8 +16,8 @@ class CreateModulosImunizacaoTable extends Migration
         Schema::create('modulos_imunizacao', function (Blueprint $table) {
             $table->increments('id_imuni');
 
-            $table->string('qtd_falta_imuni') ->nullable();
-            $table->string('obs_imuni') ->nullable();
+            $table->string('material_imuni') ->nullable();
+            $table->string('qtd_imuni') ->nullable();
 
             $table->timestamps();
 

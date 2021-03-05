@@ -11,8 +11,8 @@ class Modulo_Imunizacao extends Model
     public $primaryKey = 'id_imuni';
 
     protected $fillable = [
-        'qtd_falta_imuni',
-        'obs_imuni',
+        'material_imuni',
+        'qtd_imuni',
         'relatorio_id_imuni',
         'pergunta_id_imuni',
     ];

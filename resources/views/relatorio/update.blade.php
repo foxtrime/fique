@@ -88,42 +88,48 @@
 					{{-- Div Atenção básica (Médicos, enfermeiros e técnicos) --}}
 					<div>
 						<h2>Atenção básica (Médicos, enfermeiros e técnicos)</h2>
-						{{-- <div class="form-group">
-							<label for="exampleFormControlInput1" style="color: black"></label>
-							<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round ">
-								<i class="material-icons">add</i>
-							</button>
-							<div id="infra_box_">
-								<div class="infra-box- row" id="infra-box">
-									<div class="form-group box_funcionario">
+						@foreach ($perguntas_atencao_basica as $pergunta_atencao_basica)
+							<div class="form-group-{{$pergunta_atencao_basica->id}}">
+								<label for="exampleFormControlInput1" style="color: black">{{$pergunta_atencao_basica->titulo}}</label>
+								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_at_basi{{$pergunta_atencao_basica->id}}">
+									<i class="material-icons">add</i>
+								</button>
+								<div id="atencao_basica_box_{{$pergunta_atencao_basica->id}}">
+									<div class="atencao-basica-box-{{$pergunta_atencao_basica->id}} row hide" id="atencao-basica-box">
+										
 										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-											<input type="text" class="form-control" id="id_at_basi" name="id_at_basi[]" placeholder="N° Chamado" value="">
+											<input type="text" class="form-control" id="id_at_basi" name="id_at_basi[]" value="">
 										</div>
 
 										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-											<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="">
+											<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
 										</div>
 
 										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
 											<div class="form-group ">
 												<label for="inputState">Funcionario</label>
-												<select id="inputState" class="form-control">
+												<select id="nome_at_basi" name="nome_at_basi[]" class="form-control">
 												  <option selected>Selecione um Funcionario</option>
-												  <option>...</option>
-												  <option>...</option>
-												  <option>...</option>
+												  @foreach ($funcionarios as $funcionario)
+													  <option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
+												  @endforeach
 												</select>
 											</div>
 										</div>
+
 										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-											<input type="text" class="form-control" id="at_basi" name="at_basi[]" placeholder="Obs">
+											<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Observação">
 										</div>
-										<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control"><i class='glyphicon glyphicon-trash'></i></button>
+
+										<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_atencao_basica_{{$pergunta_atencao_basica->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+										<br>
+										<br>
+										<br>
+										
 									</div>
 								</div>
 							</div>
-						</div> --}}
-
+						@endforeach
 
 					</div>
 					{{-- Div Atenção básica (Médicos, enfermeiros e técnicos) Fim  --}}
@@ -318,24 +324,6 @@
 								</div>
 							</div>
 							@endif
-							{{-- <div id="farmacia_box_{{$pergunta_farmacia->id}}">
-								<div class="farmacia-box-{{$pergunta_farmacia->id}} row hide" id="farmacia-box">
-									<div class="form-group box_funcionario">
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-											<div class="form-group ">
-												<label for="inputState">Funcionario</label>
-												<select id="inputState" class="form-control">
-												  <option selected>Selecione um Funcionario</option>
-												  <option>...</option>
-												  <option>...</option>
-												  <option>...</option>
-												</select>
-											</div>
-										</div>
-										<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_farmacia_{{$pergunta_farmacia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
-									</div>
-								</div>
-							</div> --}}
 						</div>
 						@endforeach
 					</div>
@@ -352,17 +340,49 @@
 									<i class="material-icons">add</i>
 								</button>
 								<div id="imuni_box_{{$pergunta_imunizacao->id}}">
-									<div class="{{$pergunta_imunizacao->id}} row hide" id="imuni-box">
-										<div class="imuni-box-{{$pergunta_imunizacao->id}} row hide" id="imuni-box">
-											<div class="form-group box_funcionario">
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text">
-												</div>
-												<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_imuni_{{$pergunta_imunizacao->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+									<div class="imuni-box-{{$pergunta_imunizacao->id}} row hide" id="imuni-box">
+										<div class="form-group box_funcionario">
+											
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="id_imuni" name="id_imuni[]" value="">
 											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="pergunta_id_imuni" name="pergunta_id_imuni[]" value="{{$pergunta_imunizacao->id}}">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="material_imuni" name="material_imuni[]" placeholder="Material" value="">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="qtd_imuni" name="qtd_imuni[]" placeholder="Quantidade" value="">
+											</div>
+											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_imuni_{{$pergunta_imunizacao->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
 										</div>
 									</div>
 								</div>
+								@foreach ($modulo_imunizacao as $item3)
+									@if ($item3->pergunta_id_imuni == $pergunta_imunizacao->id)
+										<div class="imuni-box-e row" id="imuni-box-e">
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="id_imuni" name="id_imuni[]" value="{{$item3->id_imuni}}">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="pergunta_id_imuni" name="pergunta_id_imuni[]" value="{{$pergunta_imunizacao->id}}">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="material_imuni" name="material_imuni[]" placeholder="Material" value="{{$item3->material_imuni}}">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="qtd_imuni" name="qtd_imuni[]" placeholder="Quantidade" value="{{$item3->qtd_imuni}}">
+											</div>
+										</div>
+									@endif
+								@endforeach
 							</div>
 						@endforeach
 					</div>
@@ -505,6 +525,84 @@ $(function(){
 					$(this).parents('.ti-box-6').remove();
 				});
 				// --------------------------------------------------------------------------------
+
+				// clonador_at_basi
+				// atencao_basica
+
+				$('.clonador_at_basi1').click(function(){
+					$clone = $('.atencao-basica-box-1.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#atencao_basica_box_1').append($clone);
+				});
+				$('.btn_remove_atencao_basica_1').click(function(){
+					$(this).parents('.atencao-basica-box-1').remove();
+				});
+
+				$('.clonador_at_basi2').click(function(){
+					$clone = $('.atencao-basica-box-2.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#atencao_basica_box_2').append($clone);
+				});
+				$('.btn_remove_atencao_basica_2').click(function(){
+					$(this).parents('.atencao-basica-box-2').remove();
+				});
+
+				$('.clonador_at_basi3').click(function(){
+					$clone = $('.atencao-basica-box-3.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#atencao_basica_box_3').append($clone);
+				});
+				$('.btn_remove_atencao_basica_3').click(function(){
+					$(this).parents('.atencao-basica-box-3').remove();
+				});
+
+				$('.clonador_at_basi4').click(function(){
+					$clone = $('.atencao-basica-box-4.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#atencao_basica_box_4').append($clone);
+				});
+				$('.btn_remove_atencao_basica_4').click(function(){
+					$(this).parents('.atencao-basica-box-4').remove();
+				});
+
+				$('.clonador_at_basi5').click(function(){
+					$clone = $('.atencao-basica-box-5.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#atencao_basica_box_5').append($clone);
+				});
+				$('.btn_remove_atencao_basica_5').click(function(){
+					$(this).parents('.atencao-basica-box-5').remove();
+				});
+
+				$('.clonador_at_basi6').click(function(){
+					$clone = $('.atencao-basica-box-6.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#atencao_basica_box_6').append($clone);
+				});
+				$('.btn_remove_atencao_basica_6').click(function(){
+					$(this).parents('.atencao-basica-box-6').remove();
+				});
+
+				$('.clonador_at_basi7').click(function(){
+					$clone = $('.atencao-basica-box-7.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#atencao_basica_box_7').append($clone);
+				});
+				$('.btn_remove_atencao_basica_7').click(function(){
+					$(this).parents('.atencao-basica-box-7').remove();
+				});
+
+				$('.clonador_at_basi8').click(function(){
+					$clone = $('.atencao-basica-box-8.hide').clone(true);
+					$clone.removeClass('hide');
+					$('#atencao_basica_box_8').append($clone);
+				});
+				$('.btn_remove_atencao_basica_8').click(function(){
+					$(this).parents('.atencao-basica-box-8').remove();
+				});
+
+				//----------------------------------------------------------------------------------
+
 				$('.clonador_infra1').click(function(){
 					$clone = $('.infra-box-1.hide').clone(true);
 					$clone.removeClass('hide');
