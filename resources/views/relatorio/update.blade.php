@@ -94,41 +94,108 @@
 								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_at_basi{{$pergunta_atencao_basica->id}}">
 									<i class="material-icons">add</i>
 								</button>
-								<div id="atencao_basica_box_{{$pergunta_atencao_basica->id}}">
-									<div class="atencao-basica-box-{{$pergunta_atencao_basica->id}} row hide" id="atencao-basica-box">
-										
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-											<input type="text" class="form-control" id="id_at_basi" name="id_at_basi[]" value="">
-										</div>
-
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-											<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
-										</div>
-
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-											<div class="form-group ">
-												<label for="inputState">Funcionario</label>
-												<select id="nome_at_basi" name="nome_at_basi[]" class="form-control">
-												  <option selected>Selecione um Funcionario</option>
-												  @foreach ($funcionarios as $funcionario)
-													  <option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
-												  @endforeach
-												</select>
+								@if ($pergunta_atencao_basica->id != 8)
+									<div id="atencao_basica_box_{{$pergunta_atencao_basica->id}}">
+										<div class="atencao-basica-box-{{$pergunta_atencao_basica->id}} row hide" id="atencao-basica-box">
+											
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="id_at_basi" name="id_at_basi[]" value="">
 											</div>
-										</div>
 
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-											<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Observação">
-										</div>
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
+											</div>
 
-										<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_atencao_basica_{{$pergunta_atencao_basica->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
-										<br>
-										<br>
-										<br>
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<div class="form-group ">
+													<label for="inputState">Funcionario</label>
+													<select id="nome_at_basi" name="nome_at_basi[]" class="form-control">
+													<option selected>Selecione um Funcionario</option>
+													@foreach ($funcionarios as $funcionario)
+														<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
+													@endforeach
+													</select>
+												</div>
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Observação">
+											</div>
+
+											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_atencao_basica_{{$pergunta_atencao_basica->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+											<br>
+											<br>
+										</div>
+									</div>
+								@elseif ($pergunta_atencao_basica->id)
+									<div id="atencao_basica_box_{{$pergunta_atencao_basica->id}}">
+										<div class="atencao-basica-box-{{$pergunta_atencao_basica->id}} row hide" id="atencao-basica-box">
+												
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="id_at_basi[]" name="id_at_basi[]" value="">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="nome_at_basi" name="nome_at_basi[]" placeholder="Qual Cadastro">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Observação">
+												</div>
+												<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_atencao_basica_{{$pergunta_atencao_basica->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+										</div>
+									</div>
+								@endif								
+							</div>
+							@foreach ($modulo_atencao_basica as $item4)
+								@if ($item4->pergunta_id_at_basi == $pergunta_atencao_basica->id)
+								<div class="at-basi-box-e row" id="at-basi-box-e">
+									<div class="form-group box_funcionario">
 										
+										@if ($pergunta_atencao_basica->id != 8)
+
+										{{-- talvez um if ou um foreach de funcionarios com um comparativo --}}
+											{{-- <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="id_at_basi[]" name="id_at_basi[]" value="{{$item4->id_at_basi}}">
+											</div>
+										
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
+											</div>
+										
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="nome_at_basi" name="nome_at_basi[]" value="{{$item4->nome_at_basi}}">
+											</div>
+										
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Obs" value="{{$item4->descri_at_basi}}">
+											</div> --}}
+										@else
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="id_at_basi[]" name="id_at_basi[]" value="{{$item4->id_at_basi}}">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="nome_at_basi" name="nome_at_basi[]" placeholder="Qual Cadastro" value="{{$item4->nome_at_basi}}">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Obs" value="{{$item4->descri_at_basi}}">
+											</div>
+										@endif
+
 									</div>
 								</div>
-							</div>
+								@endif
+							@endforeach
 						@endforeach
 
 					</div>
