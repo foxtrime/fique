@@ -153,27 +153,34 @@
 							</div>
 							@foreach ($modulo_atencao_basica as $item4)
 								@if ($item4->pergunta_id_at_basi == $pergunta_atencao_basica->id)
-								<div class="at-basi-box-e row" id="at-basi-box-e">
+								<div class="atencao-basica-box-e row" id="atencao-basica-box-e">
 									<div class="form-group box_funcionario">
 										
 										@if ($pergunta_atencao_basica->id != 8)
 
-										{{-- talvez um if ou um foreach de funcionarios com um comparativo --}}
-											{{-- <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="id_at_basi[]" name="id_at_basi[]" value="{{$item4->id_at_basi}}">
+										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+											<input type="text" class="form-control" id="id_at_basi" name="id_at_basi[]" value="{{$item4->id_at_basi}}">
+										</div>
+
+										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+											<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
+										</div>
+
+										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+											<div class="form-group">
+												<label for="inputState">Funcionario</label>
+												<select name="nome_at_basi[]" id="nome_at_basi" class="form-control">
+													@foreach ($funcionarios as $funcionario)
+														@if ($item4->nome_at_basi == $funcionario->id)
+															<option value="">{{$funcionario->nome}}</option>
+														@endif
+													@endforeach
+
+												</select>
 											</div>
-										
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
-											</div>
-										
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="nome_at_basi" name="nome_at_basi[]" value="{{$item4->nome_at_basi}}">
-											</div>
-										
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Obs" value="{{$item4->descri_at_basi}}">
-											</div> --}}
+										</div>
+										<br>
+										<br>
 										@else
 											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
 												<input type="text" class="form-control" id="id_at_basi[]" name="id_at_basi[]" value="{{$item4->id_at_basi}}">
