@@ -172,13 +172,18 @@
 												<select name="nome_at_basi[]" id="nome_at_basi" class="form-control">
 													@foreach ($funcionarios as $funcionario)
 														@if ($item4->nome_at_basi == $funcionario->id)
-															<option value="">{{$funcionario->nome}}</option>
+															<option value="{{$funcionario->id}}">{{$funcionario->nome}}</option>
 														@endif
 													@endforeach
 
 												</select>
 											</div>
 										</div>
+
+										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+											<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Obs" value="{{$item4->descri_at_basi}}">
+										</div>
+
 										<br>
 										<br>
 										@else

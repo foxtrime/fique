@@ -71,14 +71,14 @@ class RelatorioController extends Controller
         $modulo_infraestrutura_predial = Modulo_infraestrutura_predial::where('relatorio_id_infra','=',$relatorio->id)->get();
         $modulo_atencao_basica = Modulo_Atencao_Basica::where('relatorio_id_at_basi','=',$relatorio->id)->get();
         $modulo_almoxarifado = Modulo_Almoxarifado::where('relatorio_id_almo','=',$relatorio->id)->get();
-        // $modulo_farmacia = Modulo_Farmacia::where('relatorio_id_far','=',$relatorio->id)->get();
+        $modulo_farmacia = Modulo_Farmacia::where('relatorio_id_far','=',$relatorio->id)->get();
         $modulo_imunizacao = Modulo_Imunizacao::where('relatorio_id_imuni','=',$relatorio->id)->get();
-        // $modulo_odontologia = Modulo_Odontologia::where('relatorio_id_odonto','=',$relatorio->id)->get();
+        $modulo_odontologia = Modulo_Odontologia::where('relatorio_id_odonto','=',$relatorio->id)->get();
 
         //dd($modulo_almoxarifado);
 
         
-        return view('relatorio.update', compact('relatorio','funcionarios','perguntas','modulo_ti','perguntas_Infraestrutura','perguntas_almoxarifado','perguntas_farmacia','perguntas_imunizacao','perguntas_odontologia','modulo_infraestrutura_predial','perguntas_atencao_basica','modulo_almoxarifado','modulo_imunizacao','modulo_atencao_basica'));
+        return view('relatorio.update', compact('relatorio','funcionarios','perguntas','modulo_ti','perguntas_Infraestrutura','perguntas_almoxarifado','perguntas_farmacia','perguntas_imunizacao','perguntas_odontologia','modulo_infraestrutura_predial','perguntas_atencao_basica','modulo_almoxarifado','modulo_imunizacao','modulo_atencao_basica','modulo_odontologia','modulo_farmacia'));
     }
 
     public function update(Request $request, $id)
@@ -188,10 +188,12 @@ class RelatorioController extends Controller
 
             foreach($resultados_at_basi as $resultado_at_basi){
                 if ($resultado_at_basi[0] != null && $resultado_at_basi[2] != null && $resultado_at_basi[3] != null){
-
+                    //UPDATE
                     $update_at_basi = Modulo_Atencao_Basica::find($resultado_at_basi[0]);
                     $update_at_basi->nome_at_basi = $resultado_at_basi[2];
                     $update_at_basi->descri_at_basi = $resultado_at_basi[3];
+
+                    // dd($update_at_basi);
 
                     $update_at_basi->save();   
 

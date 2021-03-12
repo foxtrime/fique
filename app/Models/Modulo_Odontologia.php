@@ -10,6 +10,19 @@ class Modulo_Odontologia extends Model
 
     public $primaryKey = 'id_odonto';
 
+    protected $fillable = [
+        'nome_odonto',
+        'descri_odonto',
+        'relatorio_id_odonto',
+        'pergunta_id_odonto',
+    ];
+
+    public function relatorio()
+    {
+        return $this->belongsTo('App\Models\Relatorio');
+    }
+
+
     
 
 
