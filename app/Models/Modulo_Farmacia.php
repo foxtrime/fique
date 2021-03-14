@@ -13,8 +13,8 @@ class Modulo_Farmacia extends Model
     protected $fillable = [
         'nome_far',
         'descri_far',
-        'relatorio_far',
-        'pergunta_far',
+        'relatorio_id_far',
+        'pergunta_id_far',
     ];
 
     public function relatorio()

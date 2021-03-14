@@ -112,7 +112,9 @@
 													<select id="nome_at_basi" name="nome_at_basi[]" class="form-control">
 													<option selected>Selecione um Funcionario</option>
 													@foreach ($funcionarios as $funcionario)
-														<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
+														@if ($funcionario->unidades[0]->id == $relatorio->unidade_id)
+															<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
+														@endif
 													@endforeach
 													</select>
 												</div>
@@ -209,7 +211,6 @@
 								@endif
 							@endforeach
 						@endforeach
-
 					</div>
 					{{-- Div Atenção básica (Médicos, enfermeiros e técnicos) Fim  --}}
 
@@ -349,17 +350,117 @@
 								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_odonto{{$pergunta_odontologia->id}}">
 									<i class="material-icons">add</i>
 								</button>
-								<div id="odonto_box_{{$pergunta_odontologia->id}}">
-									<div class="odonto-box-{{$pergunta_odontologia->id}} row hide" id="odonto-box">
-										<div class="form-group box_funcionario">
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text">
-											</div>
-											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_odonto_{{$pergunta_odontologia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+								@if ($pergunta_odontologia->id != 6 && $pergunta_odontologia->id != 7 && $pergunta_odontologia->id != 8)
+									<div id="odonto_box_{{$pergunta_odontologia->id}}">
+										<div class="odonto-box-{{$pergunta_odontologia->id}} row hide" id="odonto-box">
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="id_odonto" name="id_odonto[]" value="">
+												</div>
+												
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="pergunta_id_odonto" name="pergunta_id_odonto[]" value="{{$pergunta_odontologia->id}}">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<div class="form-group ">
+														<label for="inputState">Funcionario</label>
+														<select id="nome_odonto" name="nome_odonto[]" class="form-control">
+														<option selected>Selecione um Funcionario</option>
+														@foreach ($funcionarios as $funcionario)
+															@if ($funcionario->unidades[0]->id == $relatorio->unidade_id)
+																<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
+															@endif
+														@endforeach
+														</select>
+													</div>
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="descri_odonto" name="descri_odonto[]" placeholder="Observação">
+												</div>
+
+												<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_odonto_{{$pergunta_odontologia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+												
+												<br>
+												<br>
 										</div>
 									</div>
-								</div>
+								@elseif($pergunta_odontologia->id)
+									<div id="odonto_box_{{$pergunta_odontologia->id}}">
+										<div class="odonto-box-{{$pergunta_odontologia->id}} row hide" id="odonto-box">
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="id_odonto[]" name="id_odonto[]" value="">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="pergunta_id_odonto" name="pergunta_id_odonto[]" value="{{$pergunta_odontologia->id}}">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="nome_odonto" name="nome_odonto[]" placeholder="Qual Cadastro">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="descri_odonto" name="descri_odonto[]" placeholder="Observação">
+											</div>
+											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_odonto_{{$pergunta_odontologia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+
+										</div>
+									</div>
+								@endif
 							</div>
+							@foreach ($modulo_odontologia as $item5)
+							@if ($item5->pergunta_id_odonto == $pergunta_odontologia->id)
+									<div class="odonto-box-e row" id="odonto-box-e">
+										<div class="form-group box_funcionario">
+
+											@if ($pergunta_odontologia->id != 6 && $pergunta_odontologia->id != 7 && $pergunta_odontologia->id != 8)
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="id_odonto" name="id_odonto[]" value="{{$item5->id_odonto}}">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="pergunta_id_odonto" name="pergunta_id_odonto[]" value="{{$pergunta_odontologia->id}}">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<div class="form-group ">
+														<label for="inputState">Funcionario</label>
+														<select id="nome_odonto" name="nome_odonto[]" class="form-control">
+															@foreach ($funcionarios as $funcionario)
+																@if ($funcionario->unidades[0]->id == $relatorio->unidade_id)
+																	<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
+																@endif
+															@endforeach
+														</select>
+													</div>
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="descri_odonto" name="descri_odonto[]" value="{{$item5->descri_odonto}}" placeholder="Observação">
+												</div>
+											@else
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="id_odonto[]" name="id_odonto[]" value="{{$item5->id_odonto}}">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="pergunta_id_odonto" name="pergunta_id_odonto[]" value="{{$pergunta_odontologia->id}}">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="nome_odonto" name="nome_odonto[]" value="{{$item5->nome_odonto}}" placeholder="Qual Cadastro">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="descri_odonto" name="descri_odonto[]" value="{{$item5->descri_odonto}}" placeholder="Observação">
+												</div>
+											@endif
+										</div>
+									</div>
+								@endif
+							@endforeach
 						@endforeach
 					</div>
 					{{-- Div Odontologia Fim  --}}
@@ -369,42 +470,129 @@
 					<div>
 						<h2>Farmácia</h2>
 						@foreach ($perguntas_farmacia as $pergunta_farmacia)
-						<div class="form-group-{{$pergunta_farmacia->id}}">
-							<label for="exampleFormControlInput1" style="color: black">{{$pergunta_farmacia->titulo}}</label>
-							<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_farmacia{{$pergunta_farmacia->id}}">
-								<i class="material-icons">add</i>
-							</button>
-							@if ($pergunta_farmacia->id == 2)
-							<div id="farmacia_box_{{$pergunta_farmacia->id}}">
-								<div class="farmacia-box-{{$pergunta_farmacia->id}} row hide" id="farmacia-box">
+							<div class="form-group-{{$pergunta_farmacia->id}}">
+								<label for="exampleFormControlInput1" style="color: black">{{$pergunta_farmacia->titulo}}</label>
+								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_farmacia{{$pergunta_farmacia->id}}">
+									<i class="material-icons">add</i>
+								</button>
+								@if ($pergunta_farmacia->id == 2)
+									<div id="farmacia_box_{{$pergunta_farmacia->id}}">
+										<div class="farmacia-box-{{$pergunta_farmacia->id}} row hide" id="farmacia-box">
+											
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="id_far" name="id_far[]" value="">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="pergunta_id_far" name="pergunta_id_far[]" value="{{$pergunta_farmacia->id}}">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<div class="form-group ">
+													<label for="inputState">Funcionario</label>
+													<select id="nome_far" name="nome_far[]" class="form-control">
+													<option selected>Selecione um Funcionario</option>
+													@foreach ($funcionarios as $funcionario)
+														@if ($funcionario->unidades[0]->id == $relatorio->unidade_id)
+															<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
+														@endif
+													@endforeach
+													</select>
+												</div>
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="descri_far" name="descri_far[]" placeholder="Observação">
+											</div>
+
+											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_farmacia_{{$pergunta_farmacia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+											<br>
+											<br>
+										</div>
+									</div>
+								@elseif ($pergunta_farmacia->id)
+									<div id="farmacia_box_{{$pergunta_farmacia->id}}">
+										<div class="farmacia-box-{{$pergunta_farmacia->id}} row hide" id="farmacia-box">
+												
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="id_far[]" name="id_far[]" value="">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+													<input type="text" class="form-control" id="pergunta_id_far" name="pergunta_id_far[]" value="{{$pergunta_farmacia->id}}">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="nome_far" name="nome_far[]" placeholder="Qual Cadastro">
+												</div>
+
+												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+													<input type="text" class="form-control" id="descri_far" name="descri_far[]" placeholder="Observação">
+												</div>
+												<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_farmacia_{{$pergunta_farmacia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+										</div>
+									</div>
+								@endif								
+							</div>
+							@foreach ($modulo_farmacia as $item6)
+								@if ($item6->pergunta_id_far == $pergunta_farmacia->id)
+								<div class="farmacia-box-e row" id="farmacia-box-e">
 									<div class="form-group box_funcionario">
+										
+										@if ($pergunta_farmacia->id == 2)
+
+										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+											<input type="text" class="form-control" id="id_far" name="id_far[]" value="{{$item6->id_far}}">
+										</div>
+
+										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+											<input type="text" class="form-control" id="pergunta_id_far" name="pergunta_id_far[]" value="{{$pergunta_farmacia->id}}">
+										</div>
+
 										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-											<div class="form-group ">
+											<div class="form-group">
 												<label for="inputState">Funcionario</label>
-												<select id="inputState" class="form-control">
-												  <option selected>Selecione um Funcionario</option>
-												  @foreach ($funcionarios as $funcionario)
-													  <option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
-												  @endforeach
+												<select name="nome_far[]" id="nome_far" class="form-control">
+													@foreach ($funcionarios as $funcionario)
+														@if ($item6->nome_far == $funcionario->id)
+															<option value="{{$funcionario->id}}">{{$funcionario->nome}}</option>
+														@endif
+													@endforeach
+
 												</select>
 											</div>
 										</div>
-										<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_farmacia_{{$pergunta_farmacia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+
+										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+											<input type="text" class="form-control" id="descri_far" name="descri_far[]" placeholder="Obs" value="{{$item6->descri_far}}">
+										</div>
+
+										<br>
+										<br>
+										@else
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="id_far[]" name="id_far[]" value="{{$item6->id_far}}">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+												<input type="text" class="form-control" id="pergunta_id_far" name="pergunta_id_far[]" value="{{$pergunta_farmacia->id}}">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="nome_far" name="nome_far[]" placeholder="Qual Cadastro" value="{{$item6->nome_far}}">
+											</div>
+
+											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+												<input type="text" class="form-control" id="descri_far" name="descri_far[]" placeholder="Obs" value="{{$item6->descri_far}}">
+											</div>
+										@endif
+
 									</div>
 								</div>
-							</div> 
-							@elseif($pergunta_farmacia->id)
-							<div id="farmacia_box_{{$pergunta_farmacia->id}}">
-								<div class="farmacia-box-{{$pergunta_farmacia->id}} row hide" id="farmacia-box">
-									<div class="form-group box_funcionario">
-										<input type="text">
-										<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_farmacia_{{$pergunta_farmacia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
-									</div>
-								</div>
-							</div>
-							@endif
-						</div>
+								@endif
+							@endforeach
 						@endforeach
+
 					</div>
 					{{-- Div Farmácia Fim  --}}
 

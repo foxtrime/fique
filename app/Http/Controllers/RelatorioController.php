@@ -52,10 +52,10 @@ class RelatorioController extends Controller
     public function edit($id)
     {
         $relatorio = Relatorio::find($id);
-
-        $funcionarios = Funcionario::all();
-
-        // dd($funcionarios);
+        // dd($relatorio);
+        
+        $funcionarios = Funcionario::with('unidades')->get();
+        // dd($funcionarios[0]->unidades->id);
 
         // PERGUNTAS
         $perguntas = Ti_Pergunta::all();
@@ -75,7 +75,7 @@ class RelatorioController extends Controller
         $modulo_imunizacao = Modulo_Imunizacao::where('relatorio_id_imuni','=',$relatorio->id)->get();
         $modulo_odontologia = Modulo_Odontologia::where('relatorio_id_odonto','=',$relatorio->id)->get();
 
-        //dd($modulo_almoxarifado);
+        // dd($modulo_odontologia);
 
         
         return view('relatorio.update', compact('relatorio','funcionarios','perguntas','modulo_ti','perguntas_Infraestrutura','perguntas_almoxarifado','perguntas_farmacia','perguntas_imunizacao','perguntas_odontologia','modulo_infraestrutura_predial','perguntas_atencao_basica','modulo_almoxarifado','modulo_imunizacao','modulo_atencao_basica','modulo_odontologia','modulo_farmacia'));
@@ -204,6 +204,49 @@ class RelatorioController extends Controller
             }
         
         //=====================================================MODULO ATENCAO BASICA=============================================
+
+        //=====================================================MODULO ODONTOLOGIA================================================
+            $resultados_odonto = array_map(null, $request['id_odonto'],$request['pergunta_id_odonto'],$request['nome_odonto'],$request['descri_odonto']);
+
+            foreach($resultados_odonto as $resultado_odonto){
+                if($resultado_odonto[0] != null && $resultado_odonto[2] != null && $resultado_odonto[3] != null){
+
+                    $update_odonto = Modulo_Odontologia::find($resultado_odonto[0]);
+                    $update_odonto->nome_odonto = $resultado_odonto[2];
+                    $update_odonto->descri_odonto = $resultado_odonto[3];
+
+                    $update_odonto->save();
+
+                } elseif($resultado_odonto[0] == null && $resultado_odonto[2] != null && $resultado_odonto[3] != null){
+                    $insert = Modulo_Odontologia::create(['nome_odonto' => $resultado_odonto[2], 'descri_odonto' => $resultado_odonto[3], 'relatorio_id_odonto' => $id, 'pergunta_id_odonto' => $resultado_odonto[1]]);
+                } 
+            }
+
+        //=====================================================MODULO ODONTOLOGIA================================================
+
+        //=====================================================MODULO FARMACIA===================================================
+            $resultados_farma = array_map(null, $request['id_far'],$request['pergunta_id_far'],$request['nome_far'],$request['descri_far']);
+
+            foreach($resultados_farma as $resultado_far){
+                if($resultado_far[0] != null && $resultado_far[2] != null && $resultado_far[3] != null){
+
+                    $update_far = Modulo_Farmacia::find($resultado_far[0]);
+                    $update_far->nome_far = $resultado_far[2];
+                    $update_far->descri_far = $resultado_far[3];
+
+                    $update_far->save();
+
+                } elseif($resultado_far[0] == null && $resultado_far[2] != null && $resultado_far[3] != null){
+                    $insert = Modulo_Farmacia::create(['nome_far' => $resultado_far[2], 'descri_far' => $resultado_far[3], 'relatorio_id_far' => $id, 'pergunta_id_far' => $resultado_far[1]]);
+                } 
+            }
+            
+            
+        //=====================================================MODULO FARMACIA===================================================
+
+        
+
+
 
 
         return redirect(url('/relatorio'));   
