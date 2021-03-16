@@ -1,163 +1,122 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="pt-br">
+	@section('htmlheader_title', 'Login')
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<!-- Meta, title, CSS, favicons, etc. -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+		<title>CIQ - PMM</title>
+	
+		<!--     Fonts and icons     -->
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		
+		<link rel="stylesheet" href="{{ asset('css/app.css') }}">      
+	</head>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+	<body class="login">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+		<div id="app" style="background-color: white; "> 
+			<a class="hiddenanchor" id="signup"></a>
+			<a class="hiddenanchor" id="signin"></a>
+			<div class="cor_fundo_roxo" style="width:100%; height:150px; text-align: center;">
+				<img class="logo_topo" src="{{ asset("img/logoretangular.jpg") }}">
+			</div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+			{{-- <div class="login_wrapper"> --}}
+			<div class="logindiv">
+				{{--  login  --}}
+				<div class="animate form login_form">
+					<section class="login_content">
+						<form method="POST" action="{{url('/login')}}">
+                            @csrf
+							
+							<h1 class="cor_texto_roxo">Sistema de Controle, Inteligencia e Qualidade</h1>
+							
+							<div class="form-group row">
+								<label class="control-label col-md-2 col-sm-2 col-xs-12" for="email">Email:</label>
+								<div class="col-md-10 col-sm-10 col-xs-12">
+									<input type="email" name="email" id="email_fake" autocomplete="off" style="display: none;" />
+  								
+									<input id="email" type="email" placeholder="Email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required >
+									@if ($errors->has('email'))
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first('email') }}</strong>
+										</span>
+									@endif	
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<label class="control-label col-md-2 col-sm-2 col-xs-12" for="password">Senha:</label>
+								<div class="col-md-10 col-sm-10 col-xs-12">
+										<input id="password" type="password" placeholder="Password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required autocomplete="off">
+								
+										@if ($errors->has('password'))
+										<span class="invalid-feedback">
+											<strong>{{ $errors->first('password') }}</strong>
+										</span>
+										@endif
+								</div>
+							</div>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+							
+							<div>
+								<button type="submit" class="btn btn-default submit">
+									Login
+								</button>               
+								
+								
+							</div>
+							
+							<div class="clearfix"></div>
+							
+							
+						</form>
+					</section>
+				</div>
+		
+			</div>
+			<footer class="rodape ">
+				<div class="separator">
+							
+					<h5><i  style="font-size: 18px" class="fab fa-free-code-camp"></i> Equipe de Desenvolvimento de Sistemas</h5>
+					<h6> Subsecretaria da Tecnologia da Informação - Prefeitura Municipal de Mesquita - RJ </h6>
+					<h6> Rua Arthur Oliveira Vecchi, 120 - Centro - Mesquita - RJ - CEP: 26553-080</h6>
+				</div>
+			</footer>
+		</div>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+		<script src="{{ url(mix('/js/app.js'))}}"></script>
+		<script src="{{ asset('/js/components.js')}}"></script>
 
-                
-            </div>
-        </nav>
+		{{-- <script src="{{ asset('js/sweetalert2.js') }}"></script> --}}
 
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">{{ __('Login') }}</div>
-        
-                        <div class="card-body">
-                            <form method="POST" action="{{url('/login')}}">
-                                @csrf
-        
-                                <div class="form-group row">
-                                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-        
-                                    <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-        
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-        
-                                <div class="form-group row">
-                                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-        
-                                    <div class="col-md-6">
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-        
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-8 offset-md-4">
-                                        <button type="submit" class="btn btn-primary">
-                                            {{ __('Login') }}
-                                        </button>
-        
-                                        @if (Route::has('password.request'))
-                                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                {{ __('Forgot Your Password?') }}
-                                            </a>
-                                        @endif
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+		{{-- Vanilla Masker --}}
+		<script src="{{ asset('js/vanillaMasker.min.js') }}"></script>
 
 
-    </div>
-</body>
+		<script>
+			$("#modulo").focus();
+			$().ready(function() {
+				//mensagens de sucesso
+			
+				@if (session('erro'))
+					funcoes.notificationRight("top", "right", "danger", "{{ session('erro') }}"); 
+				@endif
+			
+							
+			});
+			
+		</script>
+
+
+		
+		
+
+	</body>
 </html>
-
-
-
-{{-- @extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{url('/login')}}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection --}}

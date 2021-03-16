@@ -11,10 +11,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'AuthController@index')->name('login');
 Route::post('/login', 'AuthController@login');
 
-
-
-
-
 Route::group(['middleware'=>['auth']], function(){
     
     Route::get('/home', 'HomeController@index')->name('home');
@@ -50,6 +46,8 @@ Route::group(['middleware'=>['auth']], function(){
     Route::resource('unidade',		    'UnidadeController');
     Route::resource('relatorio',		'RelatorioController');
     Route::resource('funcionario',      'FuncionarioController');
+    Route::resource('usuario',          'UsuarioController');
+    Route::resource('indicador',        'IndicadorController');
 //==========================================================================
 
 });

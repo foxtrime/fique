@@ -42,21 +42,11 @@
 									<div class="col-xs-12 col-sm-12 col-md-12">
 										<div class="form-group label-floating has-roxo is-empty">
 											<label class="control-label" style="font-size: 11.7px;">Selecione a Função</label>
-											<select name="funcao" id="funcao" class="form-control form-control error" style="position: inherit;" required>
-												<option value="" selected> </option>
-												<option value="Médicos 20H">Médicos 20H</option>
-												<option value="Médicos 40H">Médicos 40H</option>
-												<option value="Enfermeiro">Enfermeiro</option>
-												<option value="Tecnico de Enfermagem">Tecnico de Enfermagem</option>
-												<option value="administrativo">administrativo</option>
-												<option value="ASG">ASG</option>
-												<option value="Dentista">Dentista</option>
-												<option value="ASB">ASB</option>
-												<option value="Zeladores">Zeladores</option>
-												<option value="Técnicos de raio x">Técnicos de raio x</option>
-												<option value="coord. enfermagem">coord. enfermagem</option>
-												<option value="Assistente administrativo">Assistente administrativo</option>
-												<option value="Farmacêutico">Farmacêutico</option>
+											<select name="funcao_id" id="funcao_id" class="form-control form-control error" style="position: inherit;" required>
+												<option value="" selected>Selecione Uma Função</option>
+												@foreach ($funcoes as $funcao)
+													<option value="{{$funcao->id}}">{{$funcao->nome}}</option>
+												@endforeach
 											</select>
 										</div>
 									</div>
@@ -75,7 +65,7 @@
 										<div class="form-group label-floating has-roxo is-empty">
 											<label class="control-label" style="font-size: 11.7px;">Selecione a Unidade</label>
 											<select name="unidade" id="unidade" class="form-control form-control error" style="position: inherit;" required>
-												<option value="" selected> </option>
+												<option value="" selected>Selecione Uma Unidade</option>
 												@foreach ($unidades as $unidade)
 													<option value="{{$unidade->id}}">{{$unidade->nome}}</option>
 												@endforeach

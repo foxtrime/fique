@@ -74,7 +74,7 @@ class AuthController extends Controller
     {
         $usuarios = User::all();
         //dd($usuarios);
-        return view('authe/create', compact('usuarios'));
+        return view('usuario/index', compact('usuarios'));
     }
 
     public function store(Request $request)
@@ -87,10 +87,12 @@ class AuthController extends Controller
 
 			'name' => $request->name,
 			'email' => $request->email,
+			'nivel' => $request->nivel,
+			'unidade_id' => $request->unidade_id,
 			'password' => $md5,
 			]
 		);
         
-        return redirect()->to('/register');
+        return redirect()->to('/usuario');
     }
 }

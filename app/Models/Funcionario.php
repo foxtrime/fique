@@ -10,11 +10,16 @@ class Funcionario extends Model
 
     protected $fillable = [
        'nome',
-       'funcao'
+       'funcao_id',
     ];
 
     public function unidades()
     {
         return $this->belongsToMany('App\Models\Unidade','funcionarios_unidades');
+    }
+
+    public function funcao()
+    {
+        return $this->belongsTo('App\Models\Funcao');
     }
 }

@@ -6,15 +6,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Funcionario;
 use App\Models\Unidade;
+use App\Models\Funcao;
 
 class FuncionarioController extends Controller
 {
     public function index ()
     {
         
-        $funcionarios = Funcionario::with('unidades')->get();
+        $funcionarios = Funcionario::with('unidades','funcao')->get();
 
-        // dd($funcionarios[3]->unidades[0]->id);
+        // dd($funcionarios[1]->funcao->nome);
 
         return view('funcionario.index', compact('funcionarios'));
     }
@@ -22,10 +23,15 @@ class FuncionarioController extends Controller
     public function create ()
     {
         
+
         $unidades = Unidade::all();
         // dd($unidades);
 
-        return view('funcionario.create', compact('unidades'));
+        $funcoes = Funcao::all();
+        //  dd($funcoes);
+
+
+        return view('funcionario.create', compact('unidades','funcoes'));
     }
 
     public function store(Request $request)
@@ -34,7 +40,7 @@ class FuncionarioController extends Controller
 
         $funcionario =  new Funcionario($request->all());
 
-        // dd($funcionario);
+        //  dd($funcionario->funcao_id);
         $funcionario->save();
 
         DB::table('funcionarios_unidades')->insert(['unidade_id' => $request->unidade, 'funcionario_id' => $funcionario->id]);

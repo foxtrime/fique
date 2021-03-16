@@ -17,7 +17,7 @@
                                   <div class="card-icon">
                                     <i class="material-icons">warning</i>
                                   </div>
-                                  <p class="card-category">Chamados em Aberto</p>
+                                  <p class="card-category">Chamados em Aberto TI</p>
                                   <h3 class="card-title">{{$quantidade_chamado_aberto_ti}}</h3>
                                 </div>
                               </div>
@@ -28,7 +28,7 @@
                                     <div class="card-icon">
                                       <i class="material-icons">done</i>
                                     </div>
-                                    <p class="card-category">Quantidade Total de Chamados Resolvidos</p>
+                                    <p class="card-category">Quantidade Total de Chamados Resolvidos TI</p>
                                     <h3 class="card-title">{{$quantidade_chamado_resolvido_ti}}</h3>
                                   </div>
                                 </div>
@@ -54,15 +54,6 @@
 @push('scripts')
 
 <script>
-    console.log({{$qtd_a}})
-    console.log({{$qtd_b}})
-    console.log({{$qtd_c}})
-    console.log({{$qtd_d}})
-    console.log({{$qtd_e}})
-     console.log({{$qtd_f}})
-
- 
-
     new Chart(document.getElementById("moduloTiGeral"), {
         type: 'horizontalBar',
         data: {

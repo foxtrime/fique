@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         // $this->call(Farmacia_PerguntaSeeder::class);
         // $this->call(Imunizacao_PerguntaSeeder::class);
         // $this->call(Odontologia_PerguntaSeeder::class);
+        //$this->call(FuncaoSeeder::class);
     }
 }

@@ -11,41 +11,9 @@
 				 {{-- <img src="{{ $logado->avatar }}" /> --}}
 			 </div> 
 			 <div style="font-size: 15px;padding-top: 10px;">
-				 {{-- {{$logado->nome}} --}}
+				 {{Auth::user()->name}}
 			 </div>
-			  {{--<div class="info">
-				  <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-					<span>
-							{{ $funcionario_logado }} 
-						   <b class="caret"></b>
-					</span> 
-					 <p style="font-size: 10px;">({{ $funcionario_logado->role->acesso }} - {{ $funcionario_logado->role->peso }})</p> 
-				 </a>
- 
-				 <div class="clearfix"></div>
-				 <div class="collapse" id="collapseExample">
-					<ul class="nav">
-						<li>
-							<a href="#">
-							   <a href="{{ url("/alteraavatar") }}">
-									 <i class="material-icons">person</i> Alterar Avatar
-							   </a>
-							</a>
-						</li>
-						<li>
-							<a href="{{ url('/alterasenha') }}" >
-							   <i class="material-icons">lock_outline</i> Alterar Senha
-							</a>
-						</li>
-						 <li>
-							<a href="#">
-								<span class="sidebar-mini"> S </span>
-								<span class="sidebar-normal"> Settings </span>
-							</a>
-						</li> 
-					</ul>
-				 </div> 
-			  </div> --}}
+			
 			</div>
  
 	   {{-------------- Menu Principal --------------}}
@@ -54,18 +22,30 @@
 	
 			{{-- {{Auth::user()}} --}}
 				
-			@if(Auth::user()->nivel == 'super-admin')
+			@if(Auth::user()->nivel == 'admin')
 			<li>
 				<a href="{{ url("/home") }}">
 					<i class="material-icons">dashboard</i>
-					<p>super-admin</p>
+					<p>admin</p>
 				</a>
 			</li>
-			@elseif(Auth::user()->nivel == 'admin')
+			@elseif(Auth::user()->nivel == 'super-admin')
 				<li>
 					<a href="{{ url("/home") }}">
 						<i class="material-icons">dashboard</i>
 						<p>Inicio</p>
+					</a>
+				</li>
+				<li>
+					<a href="{{ url("/indicador") }}">
+						<i class="material-icons">dashboard</i>
+						<p>Indicadores</p>
+					</a>
+				</li>
+				<li>
+					<a href="{{ url("/funcionario") }}">
+						<i class="material-icons">dashboard</i>
+						<p>Funcionarios</p>
 					</a>
 				</li>
 				<li>
@@ -75,9 +55,9 @@
 					</a>
 				</li>
 				<li>
-					<a href="{{ url("/funcionario") }}">
+					<a href="{{ url("/usuario") }}">
 						<i class="material-icons">dashboard</i>
-						<p>Funcionarios</p>
+						<p>Usuarios</p>
 					</a>
 				</li>
 			@elseif(Auth::user()->nivel == 'user')
@@ -114,22 +94,6 @@
 					</a>
 				</li>
 			@endif
-			
-			{{-- @if ($guardagcmm || $guardagerente )
-				<li>
-					<a href="{{ url("/semsop") }}">
-						<i class="material-icons">assignment</i>
-						<p>SEMSOP Relatórios</p>
-					</a>
-				</li>
-			@elseif ($setrans || $setransgerente )
-				<li>
-					<a href="{{ url("/setrans")}}">
-						<i class="material-icons">assignment</i>
-						<p>SETRANS Relatórios</p>
-					</a>
-				</li>
-			@endif --}}
 		 </ul>
 		   
 		 <div id="footer">

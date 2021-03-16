@@ -14,7 +14,7 @@ class CreateFuncionariosUnidadesTable extends Migration
     public function up()
     {
         Schema::create('funcionarios_unidades', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('funcionario_id') ->unsigned();
             $table->integer('unidade_id')     ->unsigned();
             $table->timestamps();

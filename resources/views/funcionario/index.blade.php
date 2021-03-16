@@ -21,22 +21,18 @@
                                 <th>Nome do Funcionario</th>
                                 <th>Função</th>
                                 <th>Unidade</th>
+                                <th>Ações</th>
 							</tr>
 						</thead>
                         <tbody>
                             @foreach ($funcionarios as $funcionario)
                                 <tr>
                                     <td>{{$funcionario->nome}}</td>
-                                    <td>{{$funcionario->funcao}}</td>
-                                    {{-- @if ($funcionario->unidade =! null)
-                                        <td>{{$funcionario->unidades}}</td>
-                                    @else
-                                        <td></td>
-                                    @endif --}}
+                                    <td>{{$funcionario->funcao->nome}}</td>
                                     @foreach ($funcionario->unidades as $unidade)
                                         <td>{{$unidade->nome}}</td>
                                     @endforeach
-                                    
+                                    <td></td>
                                 </tr>
                             @endforeach
                         </tbody>

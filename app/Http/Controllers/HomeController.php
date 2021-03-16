@@ -28,6 +28,7 @@ class HomeController extends Controller
     {
         $perfil = Auth::user();
 
+        // ======================================================================TI=================================================
         // Inicio Quantidade de chamados Abertos
         $modulo_ti = Modulo_ti::where('chamado_aberto', '=', 1)->get();
         $quantidade_chamado_aberto_ti  = $modulo_ti->count();
@@ -55,6 +56,10 @@ class HomeController extends Controller
 
         $f = Modulo_ti::where('pergunta_id', '=', 6)->get();
         $qtd_f = $f->count();
+        // ======================================================================TI=================================================
+
+
+        
 
         return view('home', compact('perfil','quantidade_chamado_aberto_ti','quantidade_chamado_resolvido_ti','qtd_a','qtd_b','qtd_c','qtd_d','qtd_e','qtd_f'));
     }

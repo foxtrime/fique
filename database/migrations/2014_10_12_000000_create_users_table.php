@@ -21,7 +21,12 @@ class CreateUsersTable extends Migration
                 'admin',
                 'user',
                 'user_ti',
+                'user_at_basi',
                 'user_infra',
+                'user_almo', 
+                'user_odonto',
+                'user_farma',
+                'user_imuni',
             ]);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
