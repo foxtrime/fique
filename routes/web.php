@@ -33,9 +33,15 @@ Route::group(['middleware'=>['auth']], function(){
     //========================================================================================
     // 										CHAMADO_TI
     //========================================================================================
-    // Route::post('relatorio/enviachamadoti', 'RelatorioController@envia');
+    //Route::post('relatorio/enviachamadoti', 'RelatorioController@envia');
     Route::get('moduloti/enviachamadoti', 'ModuloTiController@envia');
     
+    //========================================================================================
+    // 										CHAMADO_INFRAESTRUTURA_PREDIAL
+    //========================================================================================
+    Route::get('moduloinfra/enviarchamadoinfra', 'ModuloInfraController@envia');
+
+
 
 //===========================Password=======================================
     Route::get 	('/alterasenha',		'AuthController@AlteraSenha');

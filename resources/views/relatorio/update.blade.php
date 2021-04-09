@@ -15,644 +15,764 @@
 					{!! method_field('PUT') !!}
 						{{ csrf_field() }}
 
+						
 						{{-- Div Ti --}}
-						<div>
-							<h2>T.I</h2>	
-							@foreach ($perguntas as $pergunta)
-								<div class="form-group-{{$pergunta->id}}">
-									<label for="exampleFormControlInput1" style="color: black">{{$pergunta->titulo}}</label>
-									<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador{{$pergunta->id}}">
-										<i class="material-icons">add</i>
-									</button>
-									<div id="ti_box_{{$pergunta->id}}">
-										<div class="ti-box-{{$pergunta->id}} row hide" id="ti-box">
-											<div class="form-group box_funcionario ">
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="id" name="id[]" placeholder="N° Chamado" value="">
-												</div>
-											
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="pergunta_id" name="pergunta_id[]" value="{{$pergunta->id}}">
-												</div>
-											
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="n_chamado" name="n_chamado[]" placeholder="N° Chamado">
-												</div>
-											
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="obs" name="obs[]" placeholder="Obs">
-												</div>
-												<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_{{$pergunta->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
-												
-												{{-- <button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador{{$pergunta->id}}">
+						<div id="accordion" role="tablist">
+							<div class="card card-collapse">
+							  <div class="card-header" role="tab" id="headingThree">
+								<h5 class="mb-0">
+								  <a class="collapsed" data-toggle="collapse" href="#collapseone" aria-expanded="false" aria-controls="collapseone">
+									<h2>T.I</h2>
+									<i class="material-icons">keyboard_arrow_down</i>
+								  </a>
+								</h5>
+							  </div>
+							  <div id="collapseone" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+								<div class="card-body">
+									<div>	
+										@foreach ($perguntas as $pergunta)
+											<div class="form-group-{{$pergunta->id}}">
+												<label for="exampleFormControlInput1" style="color: black">{{$pergunta->titulo}}</label>
+												<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador{{$pergunta->id}}">
 													<i class="material-icons">add</i>
-												</button> --}}
+												</button>
+												<div id="ti_box_{{$pergunta->id}}">
+													<div class="ti-box-{{$pergunta->id}} row hide" id="ti-box">
+														<div class="form-group box_funcionario ">
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="id" name="id[]" placeholder="N° Chamado" value="">
+															</div>
+														
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="pergunta_id" name="pergunta_id[]" value="{{$pergunta->id}}">
+															</div>
+														
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="n_chamado" name="n_chamado[]" placeholder="N° Chamado">
+															</div>
+														
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="obs" name="obs[]" placeholder="Obs">
+															</div>
+															<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_{{$pergunta->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+															
+															{{-- <button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador{{$pergunta->id}}">
+																<i class="material-icons">add</i>
+															</button> --}}
+														</div>
+													</div>
+												</div>
+			
+												@foreach ($modulo_ti as $item)
+													@if ($item->pergunta_id == $pergunta->id)
+													<div class="ti-box-e row" id="ti-box-e">
+														<div class="form-group box_funcionario ">
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="id" name="id[]" placeholder="N° Chamado" value="{{$item->id}}">
+															</div>
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="pergunta_id" name="pergunta_id[]" value="{{$pergunta->id}}">
+															</div>
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="n_chamado" name="n_chamado[]" placeholder="N° Chamado" value="{{$item->n_chamado}}">
+															</div>
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="obs" name="obs[]" placeholder="Obs" value="{{$item->obs}}">
+															</div>
+															{{-- <button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_{{$pergunta->id}}"> <i class='glyphicon glyphicon-trash'></i></button> --}}
+															@if($item->chamado_aberto == 1)
+																<button type="button" 
+																		class="btn btn-success btn-xs action botao_acao btn_control btn_enviar{{$item->id}}"
+																		id="btn_enviar{{$item->id}}"
+																		>
+																		<i class='glyphicon glyphicon-ok'></i>
+																</button>
+															@endif
+														</div>
+													</div>
+													@endif
+												@endforeach
 											</div>
-										</div>
+										@endforeach
 									</div>
-
-									@foreach ($modulo_ti as $item)
-										@if ($item->pergunta_id == $pergunta->id)
-										<div class="ti-box-e row" id="ti-box-e">
-											<div class="form-group box_funcionario ">
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="id" name="id[]" placeholder="N° Chamado" value="{{$item->id}}">
-												</div>
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="pergunta_id" name="pergunta_id[]" value="{{$pergunta->id}}">
-												</div>
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="n_chamado" name="n_chamado[]" placeholder="N° Chamado" value="{{$item->n_chamado}}">
-												</div>
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="obs" name="obs[]" placeholder="Obs" value="{{$item->obs}}">
-												</div>
-												{{-- <button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_{{$pergunta->id}}"> <i class='glyphicon glyphicon-trash'></i></button> --}}
-												@if($item->chamado_aberto == 1)
-													<button type="button" 
-															class="btn btn-success btn-xs action botao_acao btn_control btn_enviar{{$item->id}}"
-															id="btn_enviar{{$item->id}}"
-															>
-															<i class='glyphicon glyphicon-ok'></i>
-													</button>
-												@endif
-											</div>
-										</div>
-										@endif
-									@endforeach
 								</div>
-							@endforeach
-						</div>
+							  </div>
+							</div>
+						  </div>
+						
+						
 					{{-- Div Ti Fim --}}
 					
 					{{-- Div Atenção básica (Médicos, enfermeiros e técnicos) --}}
-					<div>
-						<h2>Atenção básica (Médicos, enfermeiros e técnicos)</h2>
-						@foreach ($perguntas_atencao_basica as $pergunta_atencao_basica)
-							<div class="form-group-{{$pergunta_atencao_basica->id}}">
-								<label for="exampleFormControlInput1" style="color: black">{{$pergunta_atencao_basica->titulo}}</label>
-								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_at_basi{{$pergunta_atencao_basica->id}}">
-									<i class="material-icons">add</i>
-								</button>
-								@if ($pergunta_atencao_basica->id != 8)
-									<div id="atencao_basica_box_{{$pergunta_atencao_basica->id}}">
-										<div class="atencao-basica-box-{{$pergunta_atencao_basica->id}} row hide" id="atencao-basica-box">
-											
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="id_at_basi" name="id_at_basi[]" value="">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<div class="form-group ">
-													<label for="inputState">Funcionario</label>
-													<select id="nome_at_basi" name="nome_at_basi[]" class="form-control">
-													<option selected>Selecione um Funcionario</option>
-													@foreach ($funcionarios as $funcionario)
-														@if ($funcionario->unidades[0]->id == $relatorio->unidade_id)
-															<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
-														@endif
-													@endforeach
-													</select>
+					<div id="accordion" role="tablist">
+						<div class="card card-collapse">
+						  <div class="card-header" role="tab" id="headingThree">
+							<h5 class="mb-0">
+							  <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								<h2>Atenção básica (Médicos, enfermeiros e técnicos)</h2>
+								<i class="material-icons">keyboard_arrow_down</i>
+							  </a>
+							</h5>
+						  </div>
+						  <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+							<div class="card-body">
+								<div>
+									
+									@foreach ($perguntas_atencao_basica as $pergunta_atencao_basica)
+										<div class="form-group-{{$pergunta_atencao_basica->id}}">
+											<label for="exampleFormControlInput1" style="color: black">{{$pergunta_atencao_basica->titulo}}</label>
+											<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_at_basi{{$pergunta_atencao_basica->id}}">
+												<i class="material-icons">add</i>
+											</button>
+											@if ($pergunta_atencao_basica->id != 8)
+												<div id="atencao_basica_box_{{$pergunta_atencao_basica->id}}">
+													<div class="atencao-basica-box-{{$pergunta_atencao_basica->id}} row hide" id="atencao-basica-box">
+														
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="id_at_basi" name="id_at_basi[]" value="">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<div class="form-group ">
+																<label for="inputState">Funcionario</label>
+																<select id="nome_at_basi" name="nome_at_basi[]" class="form-control">
+																<option selected>Selecione um Funcionario</option>
+																@foreach ($funcionarios as $funcionario)
+																	@if ($funcionario->unidades[0]->id == $relatorio->unidade_id)
+																		<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
+																	@endif
+																@endforeach
+																</select>
+															</div>
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Observação">
+														</div>
+			
+														<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_atencao_basica_{{$pergunta_atencao_basica->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+														<br>
+														<br>
+													</div>
+												</div>
+											@elseif ($pergunta_atencao_basica->id)
+												<div id="atencao_basica_box_{{$pergunta_atencao_basica->id}}">
+													<div class="atencao-basica-box-{{$pergunta_atencao_basica->id}} row hide" id="atencao-basica-box">
+															
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="id_at_basi[]" name="id_at_basi[]" value="">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="nome_at_basi" name="nome_at_basi[]" placeholder="Qual Cadastro">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Observação">
+															</div>
+															<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_atencao_basica_{{$pergunta_atencao_basica->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+													</div>
+												</div>
+											@endif								
+										</div>
+										@foreach ($modulo_atencao_basica as $item4)
+											@if ($item4->pergunta_id_at_basi == $pergunta_atencao_basica->id)
+											<div class="atencao-basica-box-e row" id="atencao-basica-box-e">
+												<div class="form-group box_funcionario">
+													
+													@if ($pergunta_atencao_basica->id != 8)
+			
+													<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+														<input type="text" class="form-control" id="id_at_basi" name="id_at_basi[]" value="{{$item4->id_at_basi}}">
+													</div>
+			
+													<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+														<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
+													</div>
+			
+													<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+														<div class="form-group">
+															<label for="inputState">Funcionario</label>
+															<select name="nome_at_basi[]" id="nome_at_basi" class="form-control">
+																@foreach ($funcionarios as $funcionario)
+																	@if ($item4->nome_at_basi == $funcionario->id)
+																		<option value="{{$funcionario->id}}">{{$funcionario->nome}}</option>
+																	@endif
+																@endforeach
+			
+															</select>
+														</div>
+													</div>
+			
+													<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+														<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Obs" value="{{$item4->descri_at_basi}}">
+													</div>
+			
+													<br>
+													<br>
+													@else
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="id_at_basi[]" name="id_at_basi[]" value="{{$item4->id_at_basi}}">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="nome_at_basi" name="nome_at_basi[]" placeholder="Qual Cadastro" value="{{$item4->nome_at_basi}}">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Obs" value="{{$item4->descri_at_basi}}">
+														</div>
+													@endif
+			
 												</div>
 											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Observação">
-											</div>
-
-											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_atencao_basica_{{$pergunta_atencao_basica->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
-											<br>
-											<br>
-										</div>
-									</div>
-								@elseif ($pergunta_atencao_basica->id)
-									<div id="atencao_basica_box_{{$pergunta_atencao_basica->id}}">
-										<div class="atencao-basica-box-{{$pergunta_atencao_basica->id}} row hide" id="atencao-basica-box">
-												
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="id_at_basi[]" name="id_at_basi[]" value="">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="nome_at_basi" name="nome_at_basi[]" placeholder="Qual Cadastro">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Observação">
-												</div>
-												<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_atencao_basica_{{$pergunta_atencao_basica->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
-										</div>
-									</div>
-								@endif								
-							</div>
-							@foreach ($modulo_atencao_basica as $item4)
-								@if ($item4->pergunta_id_at_basi == $pergunta_atencao_basica->id)
-								<div class="atencao-basica-box-e row" id="atencao-basica-box-e">
-									<div class="form-group box_funcionario">
-										
-										@if ($pergunta_atencao_basica->id != 8)
-
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-											<input type="text" class="form-control" id="id_at_basi" name="id_at_basi[]" value="{{$item4->id_at_basi}}">
-										</div>
-
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-											<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
-										</div>
-
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-											<div class="form-group">
-												<label for="inputState">Funcionario</label>
-												<select name="nome_at_basi[]" id="nome_at_basi" class="form-control">
-													@foreach ($funcionarios as $funcionario)
-														@if ($item4->nome_at_basi == $funcionario->id)
-															<option value="{{$funcionario->id}}">{{$funcionario->nome}}</option>
-														@endif
-													@endforeach
-
-												</select>
-											</div>
-										</div>
-
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-											<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Obs" value="{{$item4->descri_at_basi}}">
-										</div>
-
-										<br>
-										<br>
-										@else
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="id_at_basi[]" name="id_at_basi[]" value="{{$item4->id_at_basi}}">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="pergunta_id_at_basi" name="pergunta_id_at_basi[]" value="{{$pergunta_atencao_basica->id}}">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="nome_at_basi" name="nome_at_basi[]" placeholder="Qual Cadastro" value="{{$item4->nome_at_basi}}">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="descri_at_basi" name="descri_at_basi[]" placeholder="Obs" value="{{$item4->descri_at_basi}}">
-											</div>
-										@endif
-
-									</div>
+											@endif
+										@endforeach
+									@endforeach
 								</div>
-								@endif
-							@endforeach
-						@endforeach
-					</div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+
+
 					{{-- Div Atenção básica (Médicos, enfermeiros e técnicos) Fim  --}}
 
 					{{-- Div Infraestrutura Predial  --}}
-					<div>
-						<h2>Infraestrutura Predial</h2>
-						@foreach ($perguntas_Infraestrutura as $pergunta_Infraestrutura)
-							<div class="form-group-{{$pergunta_Infraestrutura->id}}">
-								<label for="exampleFormControlInput1" style="color: black">{{$pergunta_Infraestrutura->titulo}}</label>
-								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_infra{{$pergunta_Infraestrutura->id}}">
-									<i class="material-icons">add</i>
-								</button>
-								<div id="infra_box_{{$pergunta_Infraestrutura->id}}">
-									<div class="infra-box-{{$pergunta_Infraestrutura->id}} row hide" id="infra-box">
-										<div class="form-group box_funcionario ">
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="id_infra" name="id_infra[]" placeholder="N° Chamado" value="">
-											</div>
-										
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="pergunta_id_infra" name="pergunta_id_infra[]" value="{{$pergunta_Infraestrutura->id}}">
-											</div>
-										
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="n_chamado_infra" name="n_chamado_infra[]" placeholder="N° Chamado">
-											</div>
-										
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="obs_infra" name="obs_infra[]" placeholder="Obs">
-											</div>
-											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_infra_{{$pergunta_Infraestrutura->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
-											
-											{{-- <button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador{{$pergunta->id}}">
+					<div id="accordion" role="tablist">
+						<div class="card card-collapse">
+						  <div class="card-header" role="tab" id="headingThree">
+							<h5 class="mb-0">
+							  <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+								<h2>Infraestrutura Predial</h2>
+								<i class="material-icons">keyboard_arrow_down</i>
+							  </a>
+							</h5>
+						  </div>
+						  <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+							<div class="card-body">
+								<div>
+									@foreach ($perguntas_Infraestrutura as $pergunta_Infraestrutura)
+										<div class="form-group-{{$pergunta_Infraestrutura->id}}">
+											<label for="exampleFormControlInput1" style="color: black">{{$pergunta_Infraestrutura->titulo}}</label>
+											<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_infra{{$pergunta_Infraestrutura->id}}">
 												<i class="material-icons">add</i>
-											</button> --}}
-										</div>
-									</div>
-								</div>
-								@foreach ($modulo_infraestrutura_predial as $item1)
-									@if ($item1->pergunta_id_infra == $pergunta_Infraestrutura->id)
-										<div class="infra-box-e row" id="infra-box-e">
-											<div class="form-group box_funcionario">
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="id_infra" name="id_infra[]" placeholder="N° Chamado" value="{{$item1->id_infra}}">
+											</button>
+											<div id="infra_box_{{$pergunta_Infraestrutura->id}}">
+												<div class="infra-box-{{$pergunta_Infraestrutura->id}} row hide" id="infra-box">
+													<div class="form-group box_funcionario ">
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="id_infra" name="id_infra[]" placeholder="N° Chamado" value="">
+														</div>
+													
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="pergunta_id_infra" name="pergunta_id_infra[]" value="{{$pergunta_Infraestrutura->id}}">
+														</div>
+													
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="n_chamado_infra" name="n_chamado_infra[]" placeholder="N° Chamado">
+														</div>
+													
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="obs_infra" name="obs_infra[]" placeholder="Obs">
+														</div>
+														<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_infra_{{$pergunta_Infraestrutura->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+														
+													</div>
 												</div>
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="pergunta_id_infra" name="pergunta_id_infra[]" value="{{$pergunta_Infraestrutura->id}}">
-												</div>
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="n_chamado_infra" name="n_chamado_infra[]" placeholder="N° Chamado" value="{{$item1->n_chamado_infra}}">
-												</div>
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="obs_infra" name="obs_infra[]" placeholder="Obs" value="{{$item1->obs_infra}}">
-												</div>												
-												@if($item1->chamado_aberto_infra == 1)
-													<button type="button" 
-															class="btn btn-success btn-xs action botao_acao btn_control btn_enviar{{$item1->id}}"
-															id="btn_enviar{{$item1->id}}"
-															>
-															<i class='glyphicon glyphicon-ok'></i>
-													</button>
-												@endif
-
 											</div>
+											@foreach ($modulo_infraestrutura_predial as $item1)
+												@if ($item1->pergunta_id_infra == $pergunta_Infraestrutura->id)
+													<div class="infra-box-e row" id="infra-box-e">
+														<div class="form-group box_funcionario">
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="id_infra" name="id_infra[]" placeholder="N° Chamado" value="{{$item1->id_infra}}">
+															</div>
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="pergunta_id_infra" name="pergunta_id_infra[]" value="{{$pergunta_Infraestrutura->id}}">
+															</div>
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="n_chamado_infra" name="n_chamado_infra[]" placeholder="N° Chamado" value="{{$item1->n_chamado_infra}}">
+															</div>
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="obs_infra" name="obs_infra[]" placeholder="Obs" value="{{$item1->obs_infra}}">
+															</div>												
+															@if($item1->chamado_aberto_infra == 1)
+																<button type="button" 
+																		class="btn btn-success btn-xs action botao_acao btn_control btn_enviar_infra{{$item1->id_infra}}"
+																		id="btn_enviar_infra{{$item1->id_infra}}"
+																		>
+																		<i class='glyphicon glyphicon-ok'></i>
+																</button>
+															@endif
+			
+														</div>
+													</div>
+												@endif
+											@endforeach
 										</div>
-									@endif
-								@endforeach
+									@endforeach
+								</div>
 							</div>
-						@endforeach
-					</div>
+						  </div>
+						</div>
+					  </div>
+
+					
 					{{-- Div Infraestrutura Predial Fim  --}}
 
 
 					{{-- Div Almoxarifado  --}}
-					<div>
-						<h2>Almoxarifado</h2>
-						@foreach ($perguntas_almoxarifado as $pergunta_almoxarifado)
-							<div class="form-group-{{$pergunta_almoxarifado->id}}">
-								<label for="exampleFormControlInput1" style="color: black">{{$pergunta_almoxarifado->titulo}}</label>
-								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_almo{{$pergunta_almoxarifado->id}}">
-									<i class="material-icons">add</i>
-								</button>
-								<div id="almo_box_{{$pergunta_almoxarifado->id}}">
-									<div class="almo-box-{{$pergunta_almoxarifado->id}} row hide" id="almo-box">
-										<div class="form-group box_funcionario">
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="id_almo" name="id_almo[]" value="">
-											</div>
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="pergunta_id_almo" name="pergunta_id_almo[]" value="{{$pergunta_almoxarifado->id}}">
-											</div>
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="material_almo" name="material_almo[]" placeholder="Material" value="">
+
+					<div id="accordion" role="tablist">
+						<div class="card card-collapse">
+						  <div class="card-header" role="tab" id="headingThree">
+							<h5 class="mb-0">
+							  <a class="collapsed" data-toggle="collapse" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+								<h2>Almoxarifado</h2>
+								<i class="material-icons">keyboard_arrow_down</i>
+							  </a>
+							</h5>
+						  </div>
+						  <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+							<div class="card-body">
+								<div>
+									@foreach ($perguntas_almoxarifado as $pergunta_almoxarifado)
+										<div class="form-group-{{$pergunta_almoxarifado->id}}">
+											<label for="exampleFormControlInput1" style="color: black">{{$pergunta_almoxarifado->titulo}}</label>
+											<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_almo{{$pergunta_almoxarifado->id}}">
+												<i class="material-icons">add</i>
+											</button>
+											<div id="almo_box_{{$pergunta_almoxarifado->id}}">
+												<div class="almo-box-{{$pergunta_almoxarifado->id}} row hide" id="almo-box">
+													<div class="form-group box_funcionario">
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="id_almo" name="id_almo[]" value="">
+														</div>
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="pergunta_id_almo" name="pergunta_id_almo[]" value="{{$pergunta_almoxarifado->id}}">
+														</div>
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="material_almo" name="material_almo[]" placeholder="Material" value="">
+															</div>
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="qtd_almo" name="qtd_almo[]" placeholder="Quantidade" value="">
+															</div>
+														<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_almo_{{$pergunta_almoxarifado->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+													</div>
 												</div>
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="qtd_almo" name="qtd_almo[]" placeholder="Quantidade" value="">
-												</div>
-											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_almo_{{$pergunta_almoxarifado->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+											</div>
+											@foreach ($modulo_almoxarifado as $item2)
+												@if ($item2->pergunta_id_almo == $pergunta_almoxarifado->id)
+													<div class="almo-box-e row" id="almo-box-e">
+														<div class="form-group box_funcionario">
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="id_almo" name="id_almo[]" value="{{$item2->id_almo}}">
+															</div>
+															
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="pergunta_id_almo" name="pergunta_id_almo[]" value="{{$pergunta_almoxarifado->id}}">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="material_almo" name="material_almo[]" placeholder="Material" value="{{$item2->material_almo}}">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="qtd_almo" name="qtd_almo[]" placeholder="Quantidade" value="{{$item2->qtd_almo}}">
+															</div>
+														</div>
+													</div>
+												@endif
+											@endforeach
+			
 										</div>
-									</div>
+									@endforeach
 								</div>
-								@foreach ($modulo_almoxarifado as $item2)
-									@if ($item2->pergunta_id_almo == $pergunta_almoxarifado->id)
-										<div class="almo-box-e row" id="almo-box-e">
-											<div class="form-group box_funcionario">
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="id_almo" name="id_almo[]" value="{{$item2->id_almo}}">
-												</div>
-												
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="pergunta_id_almo" name="pergunta_id_almo[]" value="{{$pergunta_almoxarifado->id}}">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="material_almo" name="material_almo[]" placeholder="Material" value="{{$item2->material_almo}}">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="qtd_almo" name="qtd_almo[]" placeholder="Quantidade" value="{{$item2->qtd_almo}}">
-												</div>
-											</div>
-										</div>
-									@endif
-								@endforeach
-
 							</div>
-						@endforeach
-					</div>
+						  </div>
+						</div>
+					  </div>
+
+					
 					{{-- Div Almoxarifado Fim  --}}
 
 					{{-- Div Odontologia  --}}
-					<div>
-						<h2>Odontologia</h2>
-						@foreach ($perguntas_odontologia as $pergunta_odontologia)
-							<div class="form-group-{{$pergunta_odontologia->id}}">
-								<label for="exampleFormControlInput1" style="color: black">{{$pergunta_odontologia->titulo}}</label>
-								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_odonto{{$pergunta_odontologia->id}}">
-									<i class="material-icons">add</i>
-								</button>
-								@if ($pergunta_odontologia->id != 6 && $pergunta_odontologia->id != 7 && $pergunta_odontologia->id != 8)
-									<div id="odonto_box_{{$pergunta_odontologia->id}}">
-										<div class="odonto-box-{{$pergunta_odontologia->id}} row hide" id="odonto-box">
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="id_odonto" name="id_odonto[]" value="">
-												</div>
-												
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="pergunta_id_odonto" name="pergunta_id_odonto[]" value="{{$pergunta_odontologia->id}}">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<div class="form-group ">
-														<label for="inputState">Funcionario</label>
-														<select id="nome_odonto" name="nome_odonto[]" class="form-control">
-														<option selected>Selecione um Funcionario</option>
-														@foreach ($funcionarios as $funcionario)
-															@if ($funcionario->unidades[0]->id == $relatorio->unidade_id)
-																<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
-															@endif
-														@endforeach
-														</select>
-													</div>
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="descri_odonto" name="descri_odonto[]" placeholder="Observação">
-												</div>
-
-												<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_odonto_{{$pergunta_odontologia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
-												
-												<br>
-												<br>
-										</div>
-									</div>
-								@elseif($pergunta_odontologia->id)
-									<div id="odonto_box_{{$pergunta_odontologia->id}}">
-										<div class="odonto-box-{{$pergunta_odontologia->id}} row hide" id="odonto-box">
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="id_odonto[]" name="id_odonto[]" value="">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="pergunta_id_odonto" name="pergunta_id_odonto[]" value="{{$pergunta_odontologia->id}}">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="nome_odonto" name="nome_odonto[]" placeholder="Qual Cadastro">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="descri_odonto" name="descri_odonto[]" placeholder="Observação">
-											</div>
-											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_odonto_{{$pergunta_odontologia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
-
-										</div>
-									</div>
-								@endif
-							</div>
-							@foreach ($modulo_odontologia as $item5)
-							@if ($item5->pergunta_id_odonto == $pergunta_odontologia->id)
-									<div class="odonto-box-e row" id="odonto-box-e">
-										<div class="form-group box_funcionario">
-
+					<div id="accordion" role="tablist">
+						<div class="card card-collapse">
+						  <div class="card-header" role="tab" id="headingThree">
+							<h5 class="mb-0">
+							  <a class="collapsed" data-toggle="collapse" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+								<h2>Odontologia</h2>
+								<i class="material-icons">keyboard_arrow_down</i>
+							  </a>
+							</h5>
+						  </div>
+						  <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+							<div class="card-body">
+								<div>
+									@foreach ($perguntas_odontologia as $pergunta_odontologia)
+										<div class="form-group-{{$pergunta_odontologia->id}}">
+											<label for="exampleFormControlInput1" style="color: black">{{$pergunta_odontologia->titulo}}</label>
+											<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_odonto{{$pergunta_odontologia->id}}">
+												<i class="material-icons">add</i>
+											</button>
 											@if ($pergunta_odontologia->id != 6 && $pergunta_odontologia->id != 7 && $pergunta_odontologia->id != 8)
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="id_odonto" name="id_odonto[]" value="{{$item5->id_odonto}}">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="pergunta_id_odonto" name="pergunta_id_odonto[]" value="{{$pergunta_odontologia->id}}">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<div class="form-group ">
-														<label for="inputState">Funcionario</label>
-														<select id="nome_odonto" name="nome_odonto[]" class="form-control">
-															@foreach ($funcionarios as $funcionario)
-																@if ($funcionario->unidades[0]->id == $relatorio->unidade_id)
-																	<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
-																@endif
-															@endforeach
-														</select>
+												<div id="odonto_box_{{$pergunta_odontologia->id}}">
+													<div class="odonto-box-{{$pergunta_odontologia->id}} row hide" id="odonto-box">
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="id_odonto" name="id_odonto[]" value="">
+															</div>
+															
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="pergunta_id_odonto" name="pergunta_id_odonto[]" value="{{$pergunta_odontologia->id}}">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<div class="form-group ">
+																	<label for="inputState">Funcionario</label>
+																	<select id="nome_odonto" name="nome_odonto[]" class="form-control">
+																	<option selected>Selecione um Funcionario</option>
+																	@foreach ($funcionarios as $funcionario)
+																		@if ($funcionario->unidades[0]->id == $relatorio->unidade_id)
+																			<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
+																		@endif
+																	@endforeach
+																	</select>
+																</div>
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="descri_odonto" name="descri_odonto[]" placeholder="Observação">
+															</div>
+			
+															<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_odonto_{{$pergunta_odontologia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+															
+															<br>
+															<br>
 													</div>
 												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="descri_odonto" name="descri_odonto[]" value="{{$item5->descri_odonto}}" placeholder="Observação">
-												</div>
-											@else
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="id_odonto[]" name="id_odonto[]" value="{{$item5->id_odonto}}">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="pergunta_id_odonto" name="pergunta_id_odonto[]" value="{{$pergunta_odontologia->id}}">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="nome_odonto" name="nome_odonto[]" value="{{$item5->nome_odonto}}" placeholder="Qual Cadastro">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="descri_odonto" name="descri_odonto[]" value="{{$item5->descri_odonto}}" placeholder="Observação">
+											@elseif($pergunta_odontologia->id)
+												<div id="odonto_box_{{$pergunta_odontologia->id}}">
+													<div class="odonto-box-{{$pergunta_odontologia->id}} row hide" id="odonto-box">
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="id_odonto[]" name="id_odonto[]" value="">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="pergunta_id_odonto" name="pergunta_id_odonto[]" value="{{$pergunta_odontologia->id}}">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="nome_odonto" name="nome_odonto[]" placeholder="Qual Cadastro">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="descri_odonto" name="descri_odonto[]" placeholder="Observação">
+														</div>
+														<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_odonto_{{$pergunta_odontologia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+			
+													</div>
 												</div>
 											@endif
 										</div>
-									</div>
-								@endif
-							@endforeach
-						@endforeach
-					</div>
+										@foreach ($modulo_odontologia as $item5)
+										@if ($item5->pergunta_id_odonto == $pergunta_odontologia->id)
+												<div class="odonto-box-e row" id="odonto-box-e">
+													<div class="form-group box_funcionario">
+			
+														@if ($pergunta_odontologia->id != 6 && $pergunta_odontologia->id != 7 && $pergunta_odontologia->id != 8)
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="id_odonto" name="id_odonto[]" value="{{$item5->id_odonto}}">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="pergunta_id_odonto" name="pergunta_id_odonto[]" value="{{$pergunta_odontologia->id}}">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<div class="form-group ">
+																	<label for="inputState">Funcionario</label>
+																	<select id="nome_odonto" name="nome_odonto[]" class="form-control">
+																		@foreach ($funcionarios as $funcionario)
+																			@if ($funcionario->unidades[0]->id == $relatorio->unidade_id)
+																				<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
+																			@endif
+																		@endforeach
+																	</select>
+																</div>
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="descri_odonto" name="descri_odonto[]" value="{{$item5->descri_odonto}}" placeholder="Observação">
+															</div>
+														@else
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="id_odonto[]" name="id_odonto[]" value="{{$item5->id_odonto}}">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="pergunta_id_odonto" name="pergunta_id_odonto[]" value="{{$pergunta_odontologia->id}}">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="nome_odonto" name="nome_odonto[]" value="{{$item5->nome_odonto}}" placeholder="Qual Cadastro">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="descri_odonto" name="descri_odonto[]" value="{{$item5->descri_odonto}}" placeholder="Observação">
+															</div>
+														@endif
+													</div>
+												</div>
+											@endif
+										@endforeach
+									@endforeach
+								</div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+
+				
 					{{-- Div Odontologia Fim  --}}
 
 
 					{{-- Div Farmácia  --}}
-					<div>
-						<h2>Farmácia</h2>
-						@foreach ($perguntas_farmacia as $pergunta_farmacia)
-							<div class="form-group-{{$pergunta_farmacia->id}}">
-								<label for="exampleFormControlInput1" style="color: black">{{$pergunta_farmacia->titulo}}</label>
-								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_farmacia{{$pergunta_farmacia->id}}">
-									<i class="material-icons">add</i>
-								</button>
-								@if ($pergunta_farmacia->id == 2)
-									<div id="farmacia_box_{{$pergunta_farmacia->id}}">
-										<div class="farmacia-box-{{$pergunta_farmacia->id}} row hide" id="farmacia-box">
-											
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="id_far" name="id_far[]" value="">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="pergunta_id_far" name="pergunta_id_far[]" value="{{$pergunta_farmacia->id}}">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<div class="form-group ">
-													<label for="inputState">Funcionario</label>
-													<select id="nome_far" name="nome_far[]" class="form-control">
-													<option selected>Selecione um Funcionario</option>
-													@foreach ($funcionarios as $funcionario)
-														@if ($funcionario->unidades[0]->id == $relatorio->unidade_id)
-															<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
-														@endif
-													@endforeach
-													</select>
+					<div id="accordion" role="tablist">
+						<div class="card card-collapse">
+						  <div class="card-header" role="tab" id="headingThree">
+							<h5 class="mb-0">
+							  <a class="collapsed" data-toggle="collapse" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+								<h2>Farmácia</h2>
+								<i class="material-icons">keyboard_arrow_down</i>
+							  </a>
+							</h5>
+						  </div>
+						  <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+							<div class="card-body">
+								<div>
+									@foreach ($perguntas_farmacia as $pergunta_farmacia)
+										<div class="form-group-{{$pergunta_farmacia->id}}">
+											<label for="exampleFormControlInput1" style="color: black">{{$pergunta_farmacia->titulo}}</label>
+											<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_farmacia{{$pergunta_farmacia->id}}">
+												<i class="material-icons">add</i>
+											</button>
+											@if ($pergunta_farmacia->id == 2)
+												<div id="farmacia_box_{{$pergunta_farmacia->id}}">
+													<div class="farmacia-box-{{$pergunta_farmacia->id}} row hide" id="farmacia-box">
+														
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="id_far" name="id_far[]" value="">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="pergunta_id_far" name="pergunta_id_far[]" value="{{$pergunta_farmacia->id}}">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<div class="form-group ">
+																<label for="inputState">Funcionario</label>
+																<select id="nome_far" name="nome_far[]" class="form-control">
+																<option selected>Selecione um Funcionario</option>
+																@foreach ($funcionarios as $funcionario)
+																	@if ($funcionario->unidades[0]->id == $relatorio->unidade_id)
+																		<option value="{{$funcionario->id}}">{{$funcionario->nome}} - {{$funcionario->funcao}}</option>
+																	@endif
+																@endforeach
+																</select>
+															</div>
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="descri_far" name="descri_far[]" placeholder="Observação">
+														</div>
+			
+														<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_farmacia_{{$pergunta_farmacia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+														<br>
+														<br>
+													</div>
+												</div>
+											@elseif ($pergunta_farmacia->id)
+												<div id="farmacia_box_{{$pergunta_farmacia->id}}">
+													<div class="farmacia-box-{{$pergunta_farmacia->id}} row hide" id="farmacia-box">
+															
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="id_far[]" name="id_far[]" value="">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+																<input type="text" class="form-control" id="pergunta_id_far" name="pergunta_id_far[]" value="{{$pergunta_farmacia->id}}">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="nome_far" name="nome_far[]" placeholder="Qual Cadastro">
+															</div>
+			
+															<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+																<input type="text" class="form-control" id="descri_far" name="descri_far[]" placeholder="Observação">
+															</div>
+															<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_farmacia_{{$pergunta_farmacia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+													</div>
+												</div>
+											@endif								
+										</div>
+										@foreach ($modulo_farmacia as $item6)
+											@if ($item6->pergunta_id_far == $pergunta_farmacia->id)
+											<div class="farmacia-box-e row" id="farmacia-box-e">
+												<div class="form-group box_funcionario">
+													
+													@if ($pergunta_farmacia->id == 2)
+			
+													<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+														<input type="text" class="form-control" id="id_far" name="id_far[]" value="{{$item6->id_far}}">
+													</div>
+			
+													<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+														<input type="text" class="form-control" id="pergunta_id_far" name="pergunta_id_far[]" value="{{$pergunta_farmacia->id}}">
+													</div>
+			
+													<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+														<div class="form-group">
+															<label for="inputState">Funcionario</label>
+															<select name="nome_far[]" id="nome_far" class="form-control">
+																@foreach ($funcionarios as $funcionario)
+																	@if ($item6->nome_far == $funcionario->id)
+																		<option value="{{$funcionario->id}}">{{$funcionario->nome}}</option>
+																	@endif
+																@endforeach
+			
+															</select>
+														</div>
+													</div>
+			
+													<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+														<input type="text" class="form-control" id="descri_far" name="descri_far[]" placeholder="Obs" value="{{$item6->descri_far}}">
+													</div>
+			
+													<br>
+													<br>
+													@else
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="id_far[]" name="id_far[]" value="{{$item6->id_far}}">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="pergunta_id_far" name="pergunta_id_far[]" value="{{$pergunta_farmacia->id}}">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="nome_far" name="nome_far[]" placeholder="Qual Cadastro" value="{{$item6->nome_far}}">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="descri_far" name="descri_far[]" placeholder="Obs" value="{{$item6->descri_far}}">
+														</div>
+													@endif
+			
 												</div>
 											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="descri_far" name="descri_far[]" placeholder="Observação">
-											</div>
-
-											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_farmacia_{{$pergunta_farmacia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
-											<br>
-											<br>
-										</div>
-									</div>
-								@elseif ($pergunta_farmacia->id)
-									<div id="farmacia_box_{{$pergunta_farmacia->id}}">
-										<div class="farmacia-box-{{$pergunta_farmacia->id}} row hide" id="farmacia-box">
-												
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="id_far[]" name="id_far[]" value="">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-													<input type="text" class="form-control" id="pergunta_id_far" name="pergunta_id_far[]" value="{{$pergunta_farmacia->id}}">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="nome_far" name="nome_far[]" placeholder="Qual Cadastro">
-												</div>
-
-												<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-													<input type="text" class="form-control" id="descri_far" name="descri_far[]" placeholder="Observação">
-												</div>
-												<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_farmacia_{{$pergunta_farmacia->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
-										</div>
-									</div>
-								@endif								
-							</div>
-							@foreach ($modulo_farmacia as $item6)
-								@if ($item6->pergunta_id_far == $pergunta_farmacia->id)
-								<div class="farmacia-box-e row" id="farmacia-box-e">
-									<div class="form-group box_funcionario">
-										
-										@if ($pergunta_farmacia->id == 2)
-
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-											<input type="text" class="form-control" id="id_far" name="id_far[]" value="{{$item6->id_far}}">
-										</div>
-
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-											<input type="text" class="form-control" id="pergunta_id_far" name="pergunta_id_far[]" value="{{$pergunta_farmacia->id}}">
-										</div>
-
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-											<div class="form-group">
-												<label for="inputState">Funcionario</label>
-												<select name="nome_far[]" id="nome_far" class="form-control">
-													@foreach ($funcionarios as $funcionario)
-														@if ($item6->nome_far == $funcionario->id)
-															<option value="{{$funcionario->id}}">{{$funcionario->nome}}</option>
-														@endif
-													@endforeach
-
-												</select>
-											</div>
-										</div>
-
-										<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-											<input type="text" class="form-control" id="descri_far" name="descri_far[]" placeholder="Obs" value="{{$item6->descri_far}}">
-										</div>
-
-										<br>
-										<br>
-										@else
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="id_far[]" name="id_far[]" value="{{$item6->id_far}}">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="pergunta_id_far" name="pergunta_id_far[]" value="{{$pergunta_farmacia->id}}">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="nome_far" name="nome_far[]" placeholder="Qual Cadastro" value="{{$item6->nome_far}}">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="descri_far" name="descri_far[]" placeholder="Obs" value="{{$item6->descri_far}}">
-											</div>
-										@endif
-
-									</div>
+											@endif
+										@endforeach
+									@endforeach
 								</div>
-								@endif
-							@endforeach
-						@endforeach
+							</div>
+						  </div>
+						</div>
+					  </div>
 
-					</div>
+
 					{{-- Div Farmácia Fim  --}}
 
 
 					{{-- Div Imunização  --}}
-					<div>
-						<h2>Imunização</h2>
-						@foreach ($perguntas_imunizacao as $pergunta_imunizacao)
-							<div class="form-group-{{$pergunta_imunizacao->id}}">
-								<label for="exampleFormControlInput1" style="color: black">{{$pergunta_imunizacao->titulo}}</label>
-								<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_imuni{{$pergunta_imunizacao->id}}">
-									<i class="material-icons">add</i>
-								</button>
-								<div id="imuni_box_{{$pergunta_imunizacao->id}}">
-									<div class="imuni-box-{{$pergunta_imunizacao->id}} row hide" id="imuni-box">
-										<div class="form-group box_funcionario">
-											
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="id_imuni" name="id_imuni[]" value="">
-											</div>
 
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="pergunta_id_imuni" name="pergunta_id_imuni[]" value="{{$pergunta_imunizacao->id}}">
+					<div id="accordion" role="tablist">
+						<div class="card card-collapse">
+						  <div class="card-header" role="tab" id="headingThree">
+							<h5 class="mb-0">
+							  <a class="collapsed" data-toggle="collapse" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+								<h2>Imunização</h2>
+								<i class="material-icons">keyboard_arrow_down</i>
+							  </a>
+							</h5>
+						  </div>
+						  <div id="collapseSeven" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+							<div class="card-body">
+								<div>
+									
+									@foreach ($perguntas_imunizacao as $pergunta_imunizacao)
+										<div class="form-group-{{$pergunta_imunizacao->id}}">
+											<label for="exampleFormControlInput1" style="color: black">{{$pergunta_imunizacao->titulo}}</label>
+											<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round clonador_imuni{{$pergunta_imunizacao->id}}">
+												<i class="material-icons">add</i>
+											</button>
+											<div id="imuni_box_{{$pergunta_imunizacao->id}}">
+												<div class="imuni-box-{{$pergunta_imunizacao->id}} row hide" id="imuni-box">
+													<div class="form-group box_funcionario">
+														
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="id_imuni" name="id_imuni[]" value="">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="pergunta_id_imuni" name="pergunta_id_imuni[]" value="{{$pergunta_imunizacao->id}}">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="material_imuni" name="material_imuni[]" placeholder="Material" value="">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="qtd_imuni" name="qtd_imuni[]" placeholder="Quantidade" value="">
+														</div>
+														<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_imuni_{{$pergunta_imunizacao->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+													</div>
+												</div>
 											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="material_imuni" name="material_imuni[]" placeholder="Material" value="">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="qtd_imuni" name="qtd_imuni[]" placeholder="Quantidade" value="">
-											</div>
-											<button type="button" class="btn btn-danger btn-xs action botao_acao btn_control btn_remove_imuni_{{$pergunta_imunizacao->id}}"> <i class='glyphicon glyphicon-trash'></i></button>
+											@foreach ($modulo_imunizacao as $item3)
+												@if ($item3->pergunta_id_imuni == $pergunta_imunizacao->id)
+													<div class="imuni-box-e row" id="imuni-box-e">
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="id_imuni" name="id_imuni[]" value="{{$item3->id_imuni}}">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
+															<input type="text" class="form-control" id="pergunta_id_imuni" name="pergunta_id_imuni[]" value="{{$pergunta_imunizacao->id}}">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="material_imuni" name="material_imuni[]" placeholder="Material" value="{{$item3->material_imuni}}">
+														</div>
+			
+														<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
+															<input type="text" class="form-control" id="qtd_imuni" name="qtd_imuni[]" placeholder="Quantidade" value="{{$item3->qtd_imuni}}">
+														</div>
+													</div>
+												@endif
+											@endforeach
 										</div>
-									</div>
+									@endforeach
 								</div>
-								@foreach ($modulo_imunizacao as $item3)
-									@if ($item3->pergunta_id_imuni == $pergunta_imunizacao->id)
-										<div class="imuni-box-e row" id="imuni-box-e">
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="id_imuni" name="id_imuni[]" value="{{$item3->id_imuni}}">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3 hide">
-												<input type="text" class="form-control" id="pergunta_id_imuni" name="pergunta_id_imuni[]" value="{{$pergunta_imunizacao->id}}">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="material_imuni" name="material_imuni[]" placeholder="Material" value="{{$item3->material_imuni}}">
-											</div>
-
-											<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-lg-3">
-												<input type="text" class="form-control" id="qtd_imuni" name="qtd_imuni[]" placeholder="Quantidade" value="{{$item3->qtd_imuni}}">
-											</div>
-										</div>
-									@endif
-								@endforeach
 							</div>
-						@endforeach
-					</div>
+						  </div>
+						</div>
+					  </div>
+
+					
 					{{-- Div Imunização Fim  --}}
 
 				<!-- ============================BOTOES============================ -->
@@ -726,6 +846,46 @@ $(function(){
 			});
 		});
 	@endforeach
+
+	//Esta merda n esta funcionando como deveria ainda
+	@foreach($modulo_infraestrutura_predial as $item1)
+	$("#btn_enviar_infra{{$item1->id_infra}}").click(function(){
+			// console.log({{$item1->id_infra}});
+			swal({
+				title: "Chamado Realizado?",
+				text: "O chamado {{$item1->n_chamado_infra}} foi resolvido?",
+				icon: "warning",
+				buttons: {
+					cancel: {
+						text: "Cancelar",
+						value: "cancelar",
+						visible: true,
+						closeModal: true,
+					},
+					ok: {
+						text: "Sim, Enviar!",
+						value: 'enviar',
+						visible: true,
+						closeModal: true,
+					}
+				}
+			}).then(function(resultado){
+				if(resultado === 'enviar'){
+					// console.log({{$item1->id_infra}});
+					$.get('{{ url("moduloinfra/enviarchamadoinfra") }}', {
+							id_infra: {{$item1->id_infra}},
+						}, function(data){
+							console.log(data);
+						}).done(function(){
+							location.reload();
+						});
+				
+				};
+			});
+		});
+	@endforeach
+
+
 
       		$('body').submit(function(event){
 				if ($(this).hasClass('enviar-relatorio')) {
